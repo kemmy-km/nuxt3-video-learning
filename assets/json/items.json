@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "山田太郎",
+    "age": 12,
+    "imgSrc": "https://3.bp.blogspot.com/-x5QmHRjuoCo/VaMN3jIrhNI/AAAAAAAAvfM/asNNBmt0RyY/s800/youngman_25.png.jpeg"
+  },
+  {
+    "id": 2,
+    "name": "田中次郎",
+    "age": 22,
+    "imgSrc": "https://1.bp.blogspot.com/-WayJyjBqkxc/VaMN8EgBQzI/AAAAAAAAvgI/ncfqMLw_M30/s800/youngman_34.png.jpeg"
+  },
+  {
+    "id": 3,
+    "name": "鈴木三郎",
+    "age": 32,
+    "imgSrc": "https://4.bp.blogspot.com/-zt7NFH7Ho_4/VaMN80ZlRuI/AAAAAAAAvgU/kdDd1K8Ny_o/s800/youngman_35.png"
+  }
+]
