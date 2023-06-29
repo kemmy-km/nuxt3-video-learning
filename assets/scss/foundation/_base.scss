@@ -126,7 +126,8 @@ img {
 .card-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  // justify-content: space-between;
+  justify-content: flex-start;
   margin: 0 0;
   // margin: 0 -10px;
 }
@@ -215,7 +216,8 @@ img {
 .card-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  // justify-content: space-between;
+  justify-content: flex-start;
   // margin: 0 -10px;
   margin: 0 0;
 }

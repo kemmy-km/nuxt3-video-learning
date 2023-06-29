@@ -148,7 +148,7 @@ provide('courses', course) // coursesをコンポーネントツリーに提供�
 
 // 上書き
 .d-flex {
-  justify-content: space-between !important;
+  justify-content: flex-start !important;
 }
 
 @media (max-width: 1060px) {
