@@ -21,9 +21,9 @@ onMounted(async () => {
 
       // videos.value = response.data // APIにdataとキー名をつけている場合
       // videos.value = response // 取得したデータをvideosに設定
-      videos.value = response[0] // 取得したデータをvideosに設定
+      videos.value = response // 取得したデータをvideosに設定
       console.log(videos.value) // データをコンソールに表示するなどの処理
-      console.log(`${videoDomain.value}/video/${videos.value.video_id}`)
+      console.log(`${videoDomain.value}/video/${videos.value.video_number}`)
 
       id.value = router.params.id
       console.log(id.value)
@@ -46,10 +46,10 @@ provide('videos', videos) // videosをコンポーネントツリーに提供す
       <div v-for="video in videos" :key="video.code" class="block__videoPlayer">
         <h2>{{ video.title }}</h2>
 
-          <!-- :src="`${videoDomain}/video/${video.videoId}?h=c2865f861a`" -->
+          <!-- :src="`${videoDomain}/video/${video.videoNumber}?h=c2865f861a`" -->
         <iframe
           title="vimeo-player"
-          :src="`${videoDomain}/video/${video.video_id}`"
+          :src="`${videoDomain}/video/${video.video_number}`"
           width="640" height="360" frameborder="0" 
           allowfullscreen>
         </iframe>
@@ -64,7 +64,7 @@ provide('videos', videos) // videosをコンポーネントツリーに提供す
 
 
         <!-- <div style="width: 100px;">
-          <img :src="video.imgSrc" alt="Thumbnail" style="width: 100%;">
+          <img :src="video.imageSrc" alt="Thumbnail" style="width: 100%;">
         </div> -->
       </div>
 
@@ -89,7 +89,7 @@ provide('videos', videos) // videosをコンポーネントツリーに提供す
         <!-- <div class="col-md-8 iframe-wrapper mb-2">
         <iframe
           title="vimeo-player"
-          :src="`${videoDomain}/video/${videoId}?h=c2865f861a`"
+          :src="`${videoDomain}/video/${videoNumber}?h=c2865f861a`"
           width="640" height="360" frameborder="0" 
           allowfullscreen>
         </iframe>
@@ -101,7 +101,7 @@ provide('videos', videos) // videosをコンポーネントツリーに提供す
     <!-- <div class="col-md-4 pt-3"> -->
     <div class="col block__videoPlayerList">
 
-      <div class="row playerlist__heading">
+      <div class="row playerList__heading">
         <h3 class="heading__lv3 mb-2">コースの内容</h3>
         <button class="btn btn-info for-sp btn-toggle commonButton">プレイヤーリストを開く</button>
       </div>
@@ -110,7 +110,8 @@ provide('videos', videos) // videosをコンポーネントツリーに提供す
         {{ $course->course->name }}
       </p> -->
 
-      <ul class="playerlist">
+      <!-- コースに所属する動画一覧を表示させたい -->
+      <ul class="playerList">
         <!-- <li class="" v-for=""> -->
         <!-- <li v-for="video in videos" :key="video.code"> -->
         <li v-for="(video, index) in videos" :key="index">
@@ -118,12 +119,11 @@ provide('videos', videos) // videosをコンポーネントツリーに提供す
             id='{{ videoPlayer.id }}'>
             {{ videoPlayer.title }}
           </a> -->
-          タイトル：
-          {{ videos }}
-          <br>
-          <br>
-          {{ videos.img_src }}
-          <br>
+          <!-- タイトル： -->
+          <a :href="`/video/${video.video_code}`">
+            {{ video.title }}
+          </a>
+          <!-- {{ videos.image_src }} -->
           <br>
         </li>
       </ul>

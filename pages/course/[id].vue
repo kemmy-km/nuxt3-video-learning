@@ -59,7 +59,7 @@ provide('courses', course) // coursesをコンポーネントツリーに提供�
       </h2>
 
       <div style="width: 100px;">
-        <img :src="course.imgSrc" alt="Thumbnail" style="width: 100%;">
+        <img :src="course.imageSrc" alt="Thumbnail" style="width: 100%;">
       </div>
 
       <div class="block__course_detail">
@@ -83,7 +83,7 @@ provide('courses', course) // coursesをコンポーネントツリーに提供�
     <!-- <div class="col-md-4 pt-3"> -->
     <div class="col block__coursePlayerList">
 
-      <div class="row playerlist__heading">
+      <div class="row playerList__heading">
         <h3 class="heading__lv3 mb-2">コースの内容</h3>
         <button class="btn btn-info for-sp btn-toggle commonButton">プレイヤーリストを開く</button>
       </div>
@@ -92,7 +92,7 @@ provide('courses', course) // coursesをコンポーネントツリーに提供�
         {{ $course->course->name }}
       </p> -->
 
-      <ul class="playerlist">
+      <ul class="playerList">
         <li v-for="course in courses" :key="course.code">
           <!-- <a href='{{ route('course.show', ['id' => coursePlayer.id]) }}' class=""
             id='{{ coursePlayer.id }}'>

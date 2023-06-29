@@ -2,7 +2,7 @@
 export type CourseRequest = {
   code: string
   /** 所属するコース */
-  // courseCode: string
+  // courseId: string
 }
 
 /** コース一覧ページレスポンス */
@@ -12,13 +12,13 @@ export type CourseResponse = {
   /** 動画タイトル */
   title: string
   /** サムネイル画像 */
-  imgSrc: string
+  imageSrc: string
 }
 
 /**  コース詳細ページリクエスト */
 export type CourseDetailRequest = {
   code: string
-  // courseCode: string
+  // courseId: string
   // これは、コースの一覧画面から特定の動画を視聴したい際
 }
 // それともコース単位？コース＝動画のひとかたまり、とも言える
@@ -30,5 +30,5 @@ export type CourseDetailResponse = {
   /** コースタイトル */
   title: string
   /** サムネイル画像 */
-  imgSrc: string
+  imageSrc: string
 }

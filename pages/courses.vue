@@ -3,10 +3,8 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { API_BASE_URL } from '~/constants/common'
 
-
 const id = ref('')
 const router = useRoute()
-
 const courses = ref([])
 
 onMounted(async () => {
@@ -56,7 +54,7 @@ const showDetail = (code) => {
         @click="() => showDetail(course.code)"
       >
         <!-- @click="showDetail(course.code)" -->
-        <img :src="`${course.imgSrc}`" alt="">
+        <img :src="`${course.imageSrc}`" alt="">
 
         <div class="card-content">
           {{ course.title }}

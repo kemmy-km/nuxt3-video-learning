@@ -44,16 +44,16 @@ provide('videos', videos) // videosをコンポーネントツリーに提供す
       <div v-for="video in videos" :key="video.code" class="block__videoPlayer">
         <h2>{{ video.title }}</h2>
 
-          <!-- :src="`${videoDomain}/video/${video.videoId}?h=c2865f861a`" -->
+          <!-- :src="`${videoDomain}/video/${video.videoNumber}?h=c2865f861a`" -->
         <iframe
           title="vimeo-player"
-          :src="`${videoDomain}/video/${video.videoId}`"
+          :src="`${videoDomain}/video/${video.videoNumber}`"
           width="640" height="360" frameborder="0" 
           allowfullscreen>
         </iframe>
 
         <!-- <div style="width: 100px;">
-          <img :src="video.imgSrc" alt="Thumbnail" style="width: 100%;">
+          <img :src="video.imageSrc" alt="Thumbnail" style="width: 100%;">
         </div> -->
       </div>
 
@@ -78,7 +78,7 @@ provide('videos', videos) // videosをコンポーネントツリーに提供す
         <!-- <div class="col-md-8 iframe-wrapper mb-2">
         <iframe
           title="vimeo-player"
-          :src="`${videoDomain}/video/${videoId}?h=c2865f861a`"
+          :src="`${videoDomain}/video/${videoNumber}?h=c2865f861a`"
           width="640" height="360" frameborder="0" 
           allowfullscreen>
         </iframe>
@@ -90,7 +90,7 @@ provide('videos', videos) // videosをコンポーネントツリーに提供す
     <!-- <div class="col-md-4 pt-3"> -->
     <div class="col block__videoPlayerList">
 
-      <div class="row playerlist__heading">
+      <div class="row playerList__heading">
         <h3 class="heading__lv3 mb-2">コースの内容</h3>
         <button class="btn btn-info for-sp btn-toggle commonButton">プレイヤーリストを開く</button>
       </div>
@@ -99,7 +99,7 @@ provide('videos', videos) // videosをコンポーネントツリーに提供す
         {{ $course->course->name }}
       </p> -->
 
-      <ul class="playerlist">
+      <ul class="playerList">
         <!-- <li class="" v-for=""> -->
         <li v-for="video in videos" :key="video.code">
           <!-- <a href='{{ route('video.show', ['id' => videoPlayer.id]) }}' class=""
