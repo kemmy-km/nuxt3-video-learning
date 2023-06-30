@@ -1,17 +1,17 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { API_BASE_URL } from '~/constants/common'
 
 // const id = ref('')
-const router = useRoute()
+const router = useRouter()
 const courses = ref([])
 
 onMounted(async () => {
 
   try {
-    const response = await $fetch(`${API_BASE_URL}/courses`)
-    // const response = await $fetch(`${API_BASE_URL}/courses2`)
+    // const response = await $fetch(`${API_BASE_URL}/courses`)
+    const response = await $fetch(`${API_BASE_URL}/courses2`)
     if (response) {
       console.log('response！')
       console.log(response)
@@ -21,7 +21,6 @@ onMounted(async () => {
       console.log(courses.value) // データをコンソールに表示するなどの処理
 
       // id.value = router.params.id
-      // console.log(id.value)
     }
 
   } catch (error) {
@@ -32,28 +31,24 @@ onMounted(async () => {
 
 provide('courses', courses) // coursesをコンポーネントツリーに提供する
 
-const showDetail = (code) => {
-  // クリックイベントの処理を記述
-  console.log('Button clicked', code);
-
-  // 別のページに移動する処理
-  router.push(`/course/${id.value}`) // 移動先のパスを指定します
+/** 詳細ページに移動 */
+const showDetail = (id) => {
+  router.push(`/course/${id}`)
 }
 
 </script>
 
 <template>
   <div class="container">
-    <h2>コース一覧</h2>
+    <h2 class="heading__lv2">コース一覧</h2>
 
     <ul class="card-list">
       <li
-        v-for="course in courses" 
+        v-for="(course, index) in courses" 
         class="card__col3 shadow-sm"
-        :key="course.code"
-        @click="() => showDetail(course.code)"
+        :key="index"
+        @click="() => showDetail(course.courseId)"
       >
-        <!-- @click="showDetail(course.code)" -->
         <img :src="`${course.imageSrc}`" alt="">
 
         <div class="card-content">

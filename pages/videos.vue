@@ -1,9 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { API_BASE_URL } from '~/constants/common'
 
-const router = useRoute()
+const router = useRouter()
 const videos = ref([])
 
 onMounted(async () => {
@@ -20,7 +20,6 @@ onMounted(async () => {
       console.log(videos.value) // データをコンソールに表示するなどの処理
 
       // id.value = router.params.id
-      // console.log(id.value)
     }
 
   } catch (error) {
@@ -31,11 +30,16 @@ onMounted(async () => {
 
 provide('videos', videos) // coursesをコンポーネントツリーに提供する
 
+/** 詳細ページに移動 */
+const showDetail = (id) => {
+  router.push(`/video/${id}`)
+}
+
 </script>
 
 <template>
   <div class="container">
-    <h2>動画一覧</h2>
+    <h2 class="heading__lv2">動画一覧</h2>
 
     <ul class="card-list">
       <li
@@ -44,7 +48,6 @@ provide('videos', videos) // coursesをコンポーネントツリーに提供�
         :key="videos.code"
         @click="() => showDetail(video.videoCode)"
       >
-        <!-- @click="showDetail(video.code)" -->
         <img :src="`${video.imageSrc}`" alt="">
 
         <div class="card-content">

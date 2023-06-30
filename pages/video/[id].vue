@@ -18,7 +18,6 @@ onMounted(async () => {
     if (response) {
       console.log('response！')
       // console.log(response)
-      // console.log(response[0])
 
       // videos.value = response.data // APIにdataとキー名をつけている場合
       // videos.value = response // 取得したデータをvideosに設定
@@ -33,17 +32,20 @@ onMounted(async () => {
       const response2 = await $fetch(`${API_BASE_URL}/course/videos/${id.value}`)
       console.log(response2)
 
-      courseVideos.value = response2 // 取得したデータをvideosに設定
+      // 取得したデータをvideosに設定
+      courseVideos.value = response2
     }
 
   } catch (error) {
     console.log('失敗！')
-    console.error(error) // エラーメッセージをコンソールに表示するなどの処理
+    console.error(error)
   }
 })
 
-provide('videos', videos) // videosをコンポーネントツリーに提供する
-provide('courseVideos', courseVideos) // videosをコンポーネントツリーに提供する
+// コンポーネントツリーに提供する
+provide('videos', videos)
+provide('courseVideos', courseVideos)
+
 </script>
 
 <template>

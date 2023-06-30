@@ -5,7 +5,6 @@ import { useRoute } from 'vue-router'
 const id = ref('')
 const router = useRoute()
 
-const courseDomain = ref("https://player.vimeo.com")
 const courses = ref([])
 const course = ref([])
 
@@ -18,11 +17,14 @@ onMounted(async () => {
     if (response) {
       console.log('response！')
       console.log(response)
-      console.log(response[0])
 
       // courses.value = response.data // APIにdataとキー名をつけている場合
-      courses.value = response // 取得したデータをcoursesに設定
-      console.log(courses.value) // データをコンソールに表示するなどの処理
+
+      // 取得したデータをcoursesに設定
+      courses.value = response
+
+      // データをコンソールに表示するなどの処理
+      console.log(courses.value)
 
       id.value = router.params.id
       console.log(id.value) 
@@ -32,18 +34,25 @@ onMounted(async () => {
       console.log('response2！')
       console.log(response)
 
-      course.value = response2 // 取得したデータをcoursesに設定
-      console.log(course.value) // データをコンソールに表示するなどの処理
+      // 取得したデータをcoursesに設定
+      course.value = response2
+
+      // データをコンソールに表示するなどの処理
+      console.log(course.value)
     }
 
   } catch (error) {
     console.log('失敗！')
-    console.error(error) // エラーメッセージをコンソールに表示するなどの処理
+
+    // エラーメッセージをコンソールに表示するなどの処理
+    console.error(error)
   }
 })
 
-provide('courses', courses) // coursesをコンポーネントツリーに提供する
-provide('courses', course) // coursesをコンポーネントツリーに提供する
+// コンポーネントツリーに提供する
+provide('courses', courses)
+provide('videos', videos)
+
 </script>
 
 <template>
