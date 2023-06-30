@@ -8,6 +8,7 @@ const router = useRoute()
 
 const videoDomain = ref("https://player.vimeo.com")
 const videos = ref([])
+const courseVideos = ref([])
 
 onMounted(async () => {
 
@@ -23,10 +24,16 @@ onMounted(async () => {
       // videos.value = response // 取得したデータをvideosに設定
       videos.value = response // 取得したデータをvideosに設定
       console.log(videos.value) // データをコンソールに表示するなどの処理
-      console.log(`${videoDomain.value}/video/${videos.value.video_number}`)
+      console.log(`${videoDomain.value}/video/${videos.value.videoNumber}`)
 
       id.value = router.params.id
       console.log(id.value)
+
+      // ここは、右側のプレイヤーで使うところなのだが、このidの指定がおかしい。
+      const response2 = await $fetch(`${API_BASE_URL}/course/videos/${id.value}`)
+      console.log(response2)
+
+      courseVideos.value = response2 // 取得したデータをvideosに設定
     }
 
   } catch (error) {
@@ -36,6 +43,7 @@ onMounted(async () => {
 })
 
 provide('videos', videos) // videosをコンポーネントツリーに提供する
+provide('courseVideos', courseVideos) // videosをコンポーネントツリーに提供する
 </script>
 
 <template>
@@ -49,7 +57,7 @@ provide('videos', videos) // videosをコンポーネントツリーに提供す
           <!-- :src="`${videoDomain}/video/${video.videoNumber}?h=c2865f861a`" -->
         <iframe
           title="vimeo-player"
-          :src="`${videoDomain}/video/${video.video_number}`"
+          :src="`${videoDomain}/video/${video.videoNumber}`"
           width="640" height="360" frameborder="0" 
           allowfullscreen>
         </iframe>
@@ -114,13 +122,14 @@ provide('videos', videos) // videosをコンポーネントツリーに提供す
       <ul class="playerList">
         <!-- <li class="" v-for=""> -->
         <!-- <li v-for="video in videos" :key="video.code"> -->
-        <li v-for="(video, index) in videos" :key="index">
+        <!-- <li v-for="(video, index) in videos" :key="index"> -->
+        <li v-for="(video, index) in courseVideos" :key="index">
           <!-- <a href='{{ route('video.show', ['id' => videoPlayer.id]) }}' class=""
             id='{{ videoPlayer.id }}'>
             {{ videoPlayer.title }}
           </a> -->
           <!-- タイトル： -->
-          <a :href="`/video/${video.video_code}`">
+          <a :href="`/video/${video.videoCode}`">
             {{ video.title }}
           </a>
           <!-- {{ videos.image_src }} -->

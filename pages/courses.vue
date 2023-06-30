@@ -10,8 +10,8 @@ const courses = ref([])
 onMounted(async () => {
 
   try {
-    // const response = await $fetch(`${API_BASE_URL}/courses`)
-    const response = await $fetch(`${API_BASE_URL}/courses2`)
+    const response = await $fetch(`${API_BASE_URL}/courses`)
+    // const response = await $fetch(`${API_BASE_URL}/courses2`)
     if (response) {
       console.log('response！')
       console.log(response)
@@ -54,7 +54,7 @@ const showDetail = (code) => {
         @click="() => showDetail(course.code)"
       >
         <!-- @click="showDetail(course.code)" -->
-        <img :src="`${course.image_src}`" alt="">
+        <img :src="`${course.imageSrc}`" alt="">
 
         <div class="card-content">
           {{ course.name }}
