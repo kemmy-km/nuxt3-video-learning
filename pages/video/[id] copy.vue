@@ -1,60 +1,110 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { API_BASE_URL } from '~/constants/common'
 
-const id = ref('')
-const router = useRoute()
+// const id = ref('')
+
+const router = useRouter()
+const videoCode = ref('')
 
 const videoDomain = ref("https://player.vimeo.com")
-const videos = ref([])
+// const videos = ref([])
+
+/** ここに$fetch()した結果を代入したいのだが、、、 */
+const video = ref()
+
+/** コースに所属している動画群 */
+const courseVideos = ref([])
 
 onMounted(async () => {
 
+  // ルートパラメータからvideoCodeの値を取得
+  videoCode.value = router.currentRoute.value.params.id
+  console.log("videoCode:", videoCode.value)
+
   try {
     // const response = await $fetch(`${API_BASE_URL}/videos`)
-    const response = await $fetch(`${API_BASE_URL}/videos2`)
+    // const response = await $fetch(`${API_BASE_URL}/videos2`)
+    const response = await $fetch(`${API_BASE_URL}/video/${videoCode.value}`)
     if (response) {
-      console.log('response！')
-      // console.log(response)
-      console.log(response[0])
+      console.log('動画詳細ページのresponse！')
 
       // videos.value = response.data // APIにdataとキー名をつけている場合
       // videos.value = response // 取得したデータをvideosに設定
-      videos.value = response[0] // 取得したデータをvideosに設定
-      console.log(videos.value) // データをコンソールに表示するなどの処理
 
-      id.value = router.params.id
-      console.log(id.value)
+      // ここで、videoに代入しているはずなのだが、、、
+      video.value = response
+
+      // console.log(videos.value)
+
+      console.log("video:", video)
+      console.log("video.value:", video.value)
+      console.log("title:", video.value.title)
+      console.log("videoNumber:", video.value.videoNumber)
+
+      /** コース動画プレイヤー一覧 */
+      const response2 = await $fetch(`${API_BASE_URL}/course/videos/${video.value.courseId}`)
+      if (!!response2) return
+
+      // 取得したデータをvideosに設定
+      courseVideos.value = response2
     }
 
   } catch (error) {
     console.log('失敗！')
-    console.error(error) // エラーメッセージをコンソールに表示するなどの処理
+    console.error(error)
   }
 })
 
-provide('videos', videos) // videosをコンポーネントツリーに提供する
+// コンポーネントツリーに提供する
+// provide('videos', videos)
+provide('video', video)
+provide('courseVideos', courseVideos)
+
 </script>
 
 <template>
   <div class="container d-flex">
+
     <!-- <div class="col-md-4"> -->
     <div class="col block__video">
-      <div v-for="video in videos" :key="video.code" class="block__videoPlayer">
-        <h2>{{ video.title }}</h2>
+      <!-- <div v-for="video in videos" :key="video.code" class="block__videoPlayer"> -->
+        <!-- <h2>{{ video.title }}</h2> -->
+        <!-- <h2>{{ video.value?.title }}</h2> -->
 
-          <!-- :src="`${videoDomain}/video/${video.videoNumber}?h=c2865f861a`" -->
-        <iframe
+        <!-- <h2 v-if="video.value">{{ video.value.title }}</h2>
+        <h2 v-else="video.value">v-elseでした</h2> -->
+
+        <!-- <iframe
           title="vimeo-player"
           :src="`${videoDomain}/video/${video.videoNumber}`"
           width="640" height="360" frameborder="0" 
           allowfullscreen>
-        </iframe>
+        </iframe> -->
+
+        <!-- <iframe
+          :src="`${videoDomain}/video/838454524`" width="640"
+          height="360"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+        </iframe> -->
+          <!-- src="https://player.vimeo.com/video/838454524?h=24551a3754" width="640" -->
 
         <!-- <div style="width: 100px;">
           <img :src="video.imageSrc" alt="Thumbnail" style="width: 100%;">
         </div> -->
+      <!-- </div> -->
+
+      <div class="block__videoPlayer">
+        <!-- <h2>{{ video.title }}</h2> -->
+
+        <!-- <iframe
+          title="vimeo-player"
+          :src="`${videoDomain}/video/${video.videoNumber}`"
+          width="640" height="360" frameborder="0" 
+          allowfullscreen>
+        </iframe> -->
       </div>
 
       <div class="block__video_detail">
@@ -99,14 +149,22 @@ provide('videos', videos) // videosをコンポーネントツリーに提供す
         {{ $course->course->name }}
       </p> -->
 
+      <!-- コースに所属する動画一覧を表示させたい -->
       <ul class="playerList">
         <!-- <li class="" v-for=""> -->
-        <li v-for="video in videos" :key="video.code">
+        <!-- <li v-for="video in videos" :key="video.code"> -->
+        <!-- <li v-for="(video, index) in videos" :key="index"> -->
+        <li v-for="(video, index) in courseVideos" :key="index">
           <!-- <a href='{{ route('video.show', ['id' => videoPlayer.id]) }}' class=""
             id='{{ videoPlayer.id }}'>
             {{ videoPlayer.title }}
           </a> -->
-          {{ video.title }}
+          <!-- タイトル： -->
+          <a :href="`/video/${video.videoCode}`">
+            {{ video.title }}
+          </a>
+          <!-- {{ videos.imageSrc }} -->
+          <br>
         </li>
       </ul>
 

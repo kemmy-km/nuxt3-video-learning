@@ -12,7 +12,7 @@ onMounted(async () => {
     const response = await $fetch(`${API_BASE_URL}/videos`)
     // const response = await $fetch(`${API_BASE_URL}/videos2`)
     if (response) {
-      console.log('response！')
+      console.log('動画一覧ページのresponse！')
       console.log(response)
 
       // videos.value = response.data // APIにdataとキー名をつけている場合
@@ -31,8 +31,8 @@ onMounted(async () => {
 provide('videos', videos) // coursesをコンポーネントツリーに提供する
 
 /** 詳細ページに移動 */
-const showDetail = (id) => {
-  router.push(`/video/${id}`)
+const showDetail = (videoCode) => {
+  router.push(`/video/${videoCode}`)
 }
 
 </script>

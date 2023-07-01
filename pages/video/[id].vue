@@ -1,38 +1,37 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { API_BASE_URL } from '~/constants/common'
 
-const id = ref('')
-const router = useRoute()
-
+const router = useRouter()
+const videoCode = ref('')
 const videoDomain = ref("https://player.vimeo.com")
-const videos = ref([])
+
+/** ここに$fetch()した結果を代入させる */
+const video = ref()
+
+/** コースに所属している動画群 */
 const courseVideos = ref([])
 
 onMounted(async () => {
 
+  // ルートパラメータから`videoCode`の値を取得
+  videoCode.value = router.currentRoute.value.params.id
+  console.log("videoCode:", videoCode.value)
+
   try {
-    // const response = await $fetch(`${API_BASE_URL}/videos`)
-    const response = await $fetch(`${API_BASE_URL}/videos2`)
-    if (response) {
-      console.log('response！')
-      // console.log(response)
+    const response = await $fetch(`${API_BASE_URL}/video/${videoCode.value}`)
+    if (!!response) {
+      console.log('動画詳細ページのresponse！')
 
-      // videos.value = response.data // APIにdataとキー名をつけている場合
-      // videos.value = response // 取得したデータをvideosに設定
-      videos.value = response // 取得したデータをvideosに設定
-      console.log(videos.value) // データをコンソールに表示するなどの処理
-      console.log(`${videoDomain.value}/video/${videos.value.videoNumber}`)
+      // ここで`video`に代入
+      video.value = response
 
-      id.value = router.params.id
-      console.log(id.value)
+      /** コース動画プレイヤー一覧 */
+      const response2 = await $fetch(`${API_BASE_URL}/course/videos/${video.value.courseId}`)
+      if (!!response2) return
 
-      // ここは、右側のプレイヤーで使うところなのだが、このidの指定がおかしい。
-      const response2 = await $fetch(`${API_BASE_URL}/course/videos/${id.value}`)
-      console.log(response2)
-
-      // 取得したデータをvideosに設定
+      // 取得したデータを`courseVideos`に設定
       courseVideos.value = response2
     }
 
@@ -43,39 +42,24 @@ onMounted(async () => {
 })
 
 // コンポーネントツリーに提供する
-provide('videos', videos)
+provide('video', video)
 provide('courseVideos', courseVideos)
 
 </script>
 
 <template>
   <div class="container d-flex">
-
     <!-- <div class="col-md-4"> -->
     <div class="col block__video">
-      <div v-for="video in videos" :key="video.code" class="block__videoPlayer">
-        <h2>{{ video.title }}</h2>
+      <div class="block__videoPlayer">
+        <h2>{{ video?.title }}</h2>
 
-          <!-- :src="`${videoDomain}/video/${video.videoNumber}?h=c2865f861a`" -->
         <iframe
           title="vimeo-player"
-          :src="`${videoDomain}/video/${video.videoNumber}`"
+          :src="`${videoDomain}/video/${video?.videoNumber}`"
           width="640" height="360" frameborder="0" 
           allowfullscreen>
         </iframe>
-
-        <!-- <iframe
-          :src="`${videoDomain}/video/838454524`" width="640"
-          height="360"
-          frameborder="0"
-          allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
-        </iframe> -->
-          <!-- src="https://player.vimeo.com/video/838454524?h=24551a3754" width="640" -->
-
-
-        <!-- <div style="width: 100px;">
-          <img :src="video.imageSrc" alt="Thumbnail" style="width: 100%;">
-        </div> -->
       </div>
 
       <div class="block__video_detail">
@@ -95,19 +79,8 @@ provide('courseVideos', courseVideos)
         </div>
 
       </div>
-
-        <!-- <div class="col-md-8 iframe-wrapper mb-2">
-        <iframe
-          title="vimeo-player"
-          :src="`${videoDomain}/video/${videoNumber}?h=c2865f861a`"
-          width="640" height="360" frameborder="0" 
-          allowfullscreen>
-        </iframe>
-    </div> -->
-        <!-- src="https://player.vimeo.com/video/832017580?h=c2865f861a" -->
     </div>
     
-    <!-- block__videoPlayerList -->
     <!-- <div class="col-md-4 pt-3"> -->
     <div class="col block__videoPlayerList">
 
@@ -122,19 +95,11 @@ provide('courseVideos', courseVideos)
 
       <!-- コースに所属する動画一覧を表示させたい -->
       <ul class="playerList">
-        <!-- <li class="" v-for=""> -->
-        <!-- <li v-for="video in videos" :key="video.code"> -->
-        <!-- <li v-for="(video, index) in videos" :key="index"> -->
         <li v-for="(video, index) in courseVideos" :key="index">
-          <!-- <a href='{{ route('video.show', ['id' => videoPlayer.id]) }}' class=""
-            id='{{ videoPlayer.id }}'>
-            {{ videoPlayer.title }}
-          </a> -->
-          <!-- タイトル： -->
           <a :href="`/video/${video.videoCode}`">
             {{ video.title }}
           </a>
-          <!-- {{ videos.image_src }} -->
+          <!-- {{ videos.imageSrc }} -->
           <br>
         </li>
       </ul>

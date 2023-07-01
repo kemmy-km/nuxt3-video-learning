@@ -1,3 +1,19 @@
+# 動画サービスサンプル
+
+## 環境
+- nuxt3.6
+- npm 8.3.1
+- nodejs v16.14.0
+
+## 起動
+
+```sh
+yarn dev
+```
+
+
+
+
 # Nuxt 3 Minimal Starter
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.

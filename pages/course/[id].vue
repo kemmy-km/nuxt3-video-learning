@@ -75,7 +75,6 @@ provide('videos', videos)
         <div class="textWrapper">
 
           <p>更新日：</p>
-
           <p>概要：</p>
         </div>
 
