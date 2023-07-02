@@ -1,70 +1,57 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
+import { API_BASE_URL } from '~/constants/common'
 
-const id = ref('')
-const router = useRoute()
+const router = useRouter()
+const currentCourseCode = ref(0)
 
-const courses = ref([])
+/** ここに$fetch()した結果を代入させる */
 const course = ref([])
 
+/** コースに所属している動画List */
+let courseVideos = ref([])
+
 onMounted(async () => {
+  currentCourseCode.value = Number(router.currentRoute.value.params.id)
 
   try {
-    const response = await $fetch('http://127.0.0.1:8000/api/courses')
-    const response2 = await $fetch('http://127.0.0.1:8000/api/course/1')
+    const response = await $fetch(`${API_BASE_URL}/course/${currentCourseCode.value}`)
 
-    if (response) {
-      console.log('response！')
-      console.log(response)
-
-      // courses.value = response.data // APIにdataとキー名をつけている場合
-
+    if (!!response) {
       // 取得したデータをcoursesに設定
-      courses.value = response
-
-      // データをコンソールに表示するなどの処理
-      console.log(courses.value)
-
-      id.value = router.params.id
-      console.log(id.value) 
+      course.value = response
     }
 
-    if (response2) {
-      console.log('response2！')
-      console.log(response)
+    const response2 = await $fetch(`${API_BASE_URL}/course/videos/${course.value.courseId}`)
 
-      // 取得したデータをcoursesに設定
-      course.value = response2
-
-      // データをコンソールに表示するなどの処理
-      console.log(course.value)
-    }
+    // 取得したデータを`courseVideos`に設定
+    courseVideos.value = response2
 
   } catch (error) {
     console.log('失敗！')
-
-    // エラーメッセージをコンソールに表示するなどの処理
     console.error(error)
   }
 })
 
+/** コース詳細から、コースの一番最初の動画の詳細ページに移動する */
+const showCourseVideo = () => {
+  // courseIdを持つ動画Listを特定したい。その配列の最初のvideoCodeを指定すれば良い
+  const code = courseVideos.value[0].videoCode
+  router.push(`/video/${code}`)
+}
+
 // コンポーネントツリーに提供する
-provide('courses', courses)
-provide('videos', videos)
+provide('course', course)
 
 </script>
 
 <template>
   <div class="container d-flex">
-    <!-- <h2>動画名</h2> -->
-      <!-- {{ courses }} -->
-      <!-- ID名：{{ id }} -->
-
     <!-- <div class="col-md-4"> -->
     <div class="col block__course">
       <h2 class="heading__lv2">
-        {{ course.title }}
+        {{ course.name }}
       </h2>
 
       <div style="width: 100px;">
@@ -80,38 +67,13 @@ provide('videos', videos)
 
         <div class="buttonWrapper">
           <!-- このコースのListの一番最初のコードを指定する -->
-          <a href="/course/1"  class="commonButton">動画を視聴する</a>
+          <!-- <a href="/course/1"  class="commonButton">動画を視聴する</a> -->
+          <button @click="showCourseVideo"  class="commonButton">動画を視聴する</button>
           
           <a href="/courses"  class="commonButton">コースの一覧に戻る</a>
         </div>
       </div>
     </div>
-    
-    <!-- block__coursePlayerList -->
-    <!-- <div class="col-md-4 pt-3"> -->
-    <div class="col block__coursePlayerList">
-
-      <div class="row playerList__heading">
-        <h3 class="heading__lv3 mb-2">コースの内容</h3>
-        <button class="btn btn-info for-sp btn-toggle commonButton">プレイヤーリストを開く</button>
-      </div>
-
-      <!-- <p class="label">
-        {{ $course->course->name }}
-      </p> -->
-
-      <ul class="playerList">
-        <li v-for="course in courses" :key="course.code">
-          <!-- <a href='{{ route('course.show', ['id' => coursePlayer.id]) }}' class=""
-            id='{{ coursePlayer.id }}'>
-            {{ coursePlayer.title }}
-          </a> -->
-          {{ course.title }}
-        </li>
-      </ul>
-
-    </div>
-
   </div>
 </template>
 
