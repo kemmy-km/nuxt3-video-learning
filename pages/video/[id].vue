@@ -74,6 +74,12 @@ const showFrontOrRearVideo = (isToFront) => {
   router.push(`/video/${code}`)
 }
 
+/** コース一覧に移動する */
+const moveToCourses = () => {
+  const code = courseVideos.value[0].courseId
+  router.push(`/course/${code}`)
+}
+
 /** コース内の動画で、最小のvideoCodeを取得する */
 const minVideoCode = computed(() => {
   return Math.min(...courseVideos.value.map(video => video.videoCode))
@@ -136,7 +142,8 @@ provide('courseVideos', courseVideos)
         </div>
 
         <div class="buttonWrapper">
-          <a href="/videos"  class="commonButton">コースの一覧に戻る</a>
+          <!-- <a href="/videos"  class="commonButton">コースの一覧に戻る</a> -->
+          <button @click="moveToCourses"  class="commonButton">コースの詳細に戻る</button>
         </div>
 
       </div>

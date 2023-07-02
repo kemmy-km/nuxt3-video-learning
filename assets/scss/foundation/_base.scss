@@ -188,7 +188,8 @@ img {
 
 .card-content {
   padding: 20px;
-
+  background-color: #fff;
+  color: #000;
 }
 
 .modal-wrapper {
@@ -229,18 +230,6 @@ img {
   }
 }
 
-
-
-
-.card-list {
-  display: flex;
-  flex-wrap: wrap;
-  // justify-content: space-between;
-  justify-content: flex-start;
-  // margin: 0 -10px;
-  margin: 0 0;
-}
-
 .card {
   margin: 0 10px 20px;
   border: 1px solid #ccc;
@@ -258,10 +247,6 @@ img {
   &__col4 {
     width: calc(25% - 20px);
   }
-}
-
-.card-content {
-  padding: 20px;
 }
 
 .card__tag {

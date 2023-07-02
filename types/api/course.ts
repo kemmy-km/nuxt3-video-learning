@@ -10,9 +10,16 @@ export type CourseResponse = {
   code: string
   // courseId: string
   /** 動画タイトル */
-  title: string
+  name: string
+
+  difficulty: string
+
+  leadSentence: string
   /** サムネイル画像 */
   imageSrc: string
+
+  createdAt: string
+  updatedAt: string
 }
 
 /**  コース詳細ページリクエスト */
@@ -28,7 +35,11 @@ export type CourseDetailResponse = {
   /** コースコード */
   code: string
   /** コースタイトル */
-  title: string
+  name: string
+  difficulty: string
+  leadSentence: string
   /** サムネイル画像 */
   imageSrc: string
+  createdAt: string
+  updatedAt: string
 }

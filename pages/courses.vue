@@ -3,7 +3,6 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { API_BASE_URL } from '~/constants/common'
 
-// const id = ref('')
 const router = useRouter()
 const courses = ref([])
 
@@ -13,14 +12,12 @@ onMounted(async () => {
     // const response = await $fetch(`${API_BASE_URL}/courses`)
     const response = await $fetch(`${API_BASE_URL}/courses2`)
     if (response) {
-      console.log('response！')
       console.log(response)
 
       // courses.value = response.data // APIにdataとキー名をつけている場合
       courses.value = response // 取得したデータをcoursesに設定
       console.log(courses.value) // データをコンソールに表示するなどの処理
 
-      // id.value = router.params.id
     }
 
   } catch (error) {

@@ -36,9 +36,13 @@ onMounted(async () => {
 
 /** コース詳細から、コースの一番最初の動画の詳細ページに移動する */
 const showCourseVideo = () => {
-  // courseIdを持つ動画Listを特定したい。その配列の最初のvideoCodeを指定すれば良い
   const code = courseVideos.value[0].videoCode
   router.push(`/video/${code}`)
+}
+
+/** コース一覧に戻る */
+const moveToCourses = () => {
+  router.push(`/courses`)
 }
 
 // コンポーネントツリーに提供する
@@ -47,8 +51,59 @@ provide('course', course)
 </script>
 
 <template>
-  <div class="container d-flex">
+  <section class="section">
+    <p>aaaa</p>
+
+    <div class="container">
+      <div class="col block__course" style="position: relative;">
+        <h2 class="heading__lv2">
+          {{ course.name }}
+        </h2>
+
+        <div class="block__course_detail">
+          <div class="textWrapper">
+            <p>更新日：{{ course.updatedAt }}</p>
+            <p>概要：{{ course.leadSentence }}</p>
+          </div>
+
+          <div class="buttonWrapper">
+            <button @click="showCourseVideo"  class="commonButton">動画を視聴する</button>
+            <button @click="moveToCourses"  class="commonButton">コースの一覧に戻る</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card__col3 shadow-sm" style="position: absolute; top: 8rem; right: 4rem;">
+        <img :src="`${course.imageSrc}`" alt="">
+      <div class="card-content">
+        <!-- 学習時間
+        <br> -->
+        難易度：{{ course.difficulty }}
+      </div>
+    </div>
+
+    <ul class="card-list">
+      <li
+        v-for="(course, index) in courses" 
+        class="card__col3 shadow-sm"
+        :key="index"
+        @click="() => showDetail(course.courseId)"
+      >
+        <img :src="`${course.imageSrc}`" alt="">
+
+        <div class="card-content">
+          {{ course.name }}
+        </div>
+      </li>
+    </ul>
+
+  </section>
+
     <!-- <div class="col-md-4"> -->
+
+  <!-- <div class="container d-flex">
     <div class="col block__course">
       <h2 class="heading__lv2">
         {{ course.name }}
@@ -66,20 +121,23 @@ provide('course', course)
         </div>
 
         <div class="buttonWrapper">
-          <!-- このコースのListの一番最初のコードを指定する -->
-          <!-- <a href="/course/1"  class="commonButton">動画を視聴する</a> -->
           <button @click="showCourseVideo"  class="commonButton">動画を視聴する</button>
-          
           <a href="/courses"  class="commonButton">コースの一覧に戻る</a>
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
 </template>
 
 <style lang="scss">
 .container {
   // padding: 0 1200px;
+}
+
+.section {
+  background-color: lightskyblue;
+  color: #fff;
 }
 
 // 動画枠
