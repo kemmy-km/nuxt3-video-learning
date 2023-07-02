@@ -1,19 +1,19 @@
 /** コース一覧ページリクエスト */
-export type CourseRequest = {
-  code: string
-  /** 所属するコース */
-  // courseId: string
-}
+// export type CourseRequest = {
+//   code: number
+//   /** 所属するコース */
+//   // courseId: number
+// }
 
 /** コース一覧ページレスポンス */
 export type CourseResponse = {
-  code: string
-  // courseId: string
-  /** 動画タイトル */
+  /** コースID */
+  courseId: number
+  /** コース名 */
   name: string
-
+  /** 難易度 */
   difficulty: string
-
+  /** 概要 */
   leadSentence: string
   /** サムネイル画像 */
   imageSrc: string
@@ -22,24 +22,9 @@ export type CourseResponse = {
   updatedAt: string
 }
 
-/**  コース詳細ページリクエスト */
+/** コース詳細ページリクエスト */
 export type CourseDetailRequest = {
-  code: string
-  // courseId: string
+  /** コースID */
+  courseId: number
   // これは、コースの一覧画面から特定の動画を視聴したい際
-}
-// それともコース単位？コース＝動画のひとかたまり、とも言える
-
-/** 動画詳細ページレスポンス */
-export type CourseDetailResponse = {
-  /** コースコード */
-  code: string
-  /** コースタイトル */
-  name: string
-  difficulty: string
-  leadSentence: string
-  /** サムネイル画像 */
-  imageSrc: string
-  createdAt: string
-  updatedAt: string
 }

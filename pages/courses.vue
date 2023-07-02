@@ -1,24 +1,20 @@
-<script setup>
-import { ref, onMounted } from 'vue'
+<script lang="ts" setup>
+import { fetchCourses } from '~/apis/course'
+import { CourseResponse } from 'types/api/course'
+import { ref, onMounted, provide } from 'vue'
 import { useRouter } from 'vue-router'
-import { API_BASE_URL } from '~/constants/common'
 
 const router = useRouter()
-const courses = ref([])
+const courses = ref<CourseResponse[]>([])
 
 onMounted(async () => {
 
   try {
-    // const response = await $fetch(`${API_BASE_URL}/courses`)
-    const response = await $fetch(`${API_BASE_URL}/courses2`)
-    if (response) {
-      console.log(response)
-
-      // courses.value = response.data // APIにdataとキー名をつけている場合
-      courses.value = response // 取得したデータをcoursesに設定
-      console.log(courses.value) // データをコンソールに表示するなどの処理
-
-    }
+    const response = await fetchCourses()
+    if (!response) return
+    
+    // courses.value = response.data // APIにdataとキー名をつけている場合
+    courses.value = response // 取得したデータをcoursesに設定
 
   } catch (error) {
     console.log('失敗！')
@@ -26,10 +22,18 @@ onMounted(async () => {
   }
 })
 
-provide('courses', courses) // coursesをコンポーネントツリーに提供する
+const breadcrumbsData = [
+  { label: 'Home', path: '/' },
+  { label: 'About', path: '/about' },
+  // ページごとのパンくずリストのデータをここで定義
+]
+
+// コンポーネントツリーに提供する
+provide('items', breadcrumbsData);
+provide('courses', courses) 
 
 /** 詳細ページに移動 */
-const showDetail = (id) => {
+const showDetail = (id: number): void => {
   router.push(`/course/${id}`)
 }
 

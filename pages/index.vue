@@ -1,17 +1,17 @@
-<script setup>
+<script lang="ts" setup>
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
 /** コース一覧に移動 */
-const showCourses = () => {
+const showCourses = (): void => {
   router.push(`/courses`)
 }
 
 </script>
 
 <template>
-  <div class="container">
+  <div class="container index">
     <h2 class="heading__lv2">動画で学習できるサービス</h2>
 
     <div class="buttonWrapper flex mb-1">
@@ -44,6 +44,10 @@ const showCourses = () => {
       人気のカテゴリー
     </h3>
   </section> -->
-  
-  
 </template>
+
+<style lang="scss">
+.container.index {
+  min-height: 80vh;
+}
+</style>

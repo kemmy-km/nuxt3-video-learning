@@ -1,25 +1,20 @@
-<script setup>
+<script lang="ts" setup>
+import { fetchVideos } from '~/apis/video'
+import { VideoResponse } from 'types/api/video'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { API_BASE_URL } from '~/constants/common'
 
 const router = useRouter()
-const videos = ref([])
+const videos = ref<VideoResponse[]>([])
 
 onMounted(async () => {
 
   try {
-    const response = await $fetch(`${API_BASE_URL}/videos`)
-    // const response = await $fetch(`${API_BASE_URL}/videos2`)
-    if (response) {
-      console.log('動画一覧ページのresponse！')
-      console.log(response)
+    const response = await fetchVideos()
+    if (!response) return
 
-      // videos.value = response.data // APIにdataとキー名をつけている場合
-      videos.value = response // 取得したデータをvideosに設定
-      console.log(videos.value) // データをコンソールに表示するなどの処理
-
-    }
+    // videos.value = response.data // APIにdataとキー名をつけている場合
+    videos.value = response // 取得したデータをvideosに設定
 
   } catch (error) {
     console.log('失敗！')
@@ -30,7 +25,7 @@ onMounted(async () => {
 provide('videos', videos) // coursesをコンポーネントツリーに提供する
 
 /** 詳細ページに移動 */
-const showDetail = (videoCode) => {
+const showDetail = (videoCode: number): void => {
   router.push(`/video/${videoCode}`)
 }
 
@@ -44,7 +39,7 @@ const showDetail = (videoCode) => {
       <li
         v-for="video in videos" 
         class="card__col3 shadow-sm"
-        :key="videos.code"
+        :key="video.videoCode"
         @click="() => showDetail(video.videoCode)"
       >
         <img :src="`${video.imageSrc}`" alt="">

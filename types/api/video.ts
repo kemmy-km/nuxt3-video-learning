@@ -3,7 +3,7 @@ export type VideoRequest = {
   /** 動画コード */
   videoCode: number
   /** 所属するコース */
-  courseId: string
+  courseId: number
 }
 
 /** 動画一覧ページレスポンス */
@@ -11,46 +11,34 @@ export type VideoResponse = {
   /** 動画コード */
   videoCode: number
   /** コースID */
-  courseId: string
+  courseId: number
   /** vimeoID */
   videoNumber: string
   /** 動画タイトル */
   title: string
+  /** 概要 */
+  overview: string
   /** サムネイル画像 */
   imageSrc: string
+
+  createdAt: string
+  updatedAt: string
 }
 
 /** 動画詳細ページリクエスト */
 export type VideoDetailRequest = {
   /** 動画コード */
   videoCode: number
-  /** 所属するコース */
-  courseId: string
-  // これは、コースの一覧画面から特定の動画を視聴したい際
 }
-// それともコース単位？コース＝動画のひとかたまり、とも言える
 
 /** コースに所属する動画Listの取得Request */
-export type VideoByCourseIdRequest = {
+export type VideosByCourseIdRequest = {
   /** コースID */
-  courseId: string
+  courseId: number
 }
 
 /** コースに所属する動画Listの取得Response */
-export type VideoByCourseIdResponse = {
-  videoList: VideoDetailRequest[]
-}
-
-/** 動画詳細ページレスポンス */
-export type VideoDetailResponse = {
-  /** 動画コード */
-  videoCode: number
-  /** コースID */
-  courseId: string
-  /** vimeoID */
-  videoNumber: string
-  /** 動画タイトル */
-  title: string
-  /** サムネイル画像 */
-  imageSrc: string
+export type VideosByCourseIdResponse = {
+  /** 特定のコースIDに紐づく動画List */
+  videoList: VideoResponse[]
 }

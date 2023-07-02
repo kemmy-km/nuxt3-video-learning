@@ -1,9 +1,11 @@
-<script setup lang="ts">
-async function fetchData() {
-  const URL = 'http://127.0.0.1:8000/api/videos'
+<script lang="ts" setup>
+import { API_BASE_URL } from 'constants/common';
+
+const  fetchData = async() => {
+  const URL = `${API_BASE_URL}/videos`
 
   /** DBの作成・接続が完了したら、こちらを使用する */
-  const URL2 = 'http://127.0.0.1:8000/api/videos/1'
+  const URL2 = `${API_BASE_URL}/videos/1`
 
   try {
     const response = await fetch(URL)

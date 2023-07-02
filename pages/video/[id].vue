@@ -1,17 +1,19 @@
-<script setup>
+<script lang="ts" setup>
+import { fetchVideoDetail, fetchVideosByCourseId } from '~/apis/video'
+import { VideoResponse } from 'types/api/video'
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { API_BASE_URL } from '~/constants/common'
+import { VIDEO_DOMAIN_URL } from '~/constants/common'
 
 const router = useRouter()
-const currentVideoCode = ref(0)
-const videoDomain = ref("https://player.vimeo.com")
+const currentVideoCode = ref<number>(0)
+const videoDomain = ref<string>(VIDEO_DOMAIN_URL)
 
 /** ここに$fetch()した結果を代入させる */
-const video = ref()
+const video = ref<VideoResponse>()
 
-/** コースに所属している動画群 */
-let courseVideos = ref([])
+/** コースに所属している動画List */
+let courseVideos = ref<VideoResponse[]>([])
 
 onMounted(async () => {
 
@@ -19,19 +21,17 @@ onMounted(async () => {
   currentVideoCode.value = Number(router.currentRoute.value.params.id)
 
   try {
-    const response = await $fetch(`${API_BASE_URL}/video/${currentVideoCode.value}`)
-    if (!!response) {
-      console.log('動画詳細ページのresponse！')
+    const response = await fetchVideoDetail(currentVideoCode.value)
+    if (!response) return
 
-      // ここで`video`に代入
-      video.value = response
+    video.value = response
 
-      /** コース動画プレイヤー一覧 */
-      const response2 = await $fetch(`${API_BASE_URL}/course/videos/${video.value.courseId}`)
+    /** コース動画プレイヤー一覧 */
+    const response2 = await fetchVideosByCourseId(video.value.courseId)
+    if (!response2) return
 
-      // 取得したデータを`courseVideos`に設定
-      courseVideos.value = response2
-    }
+    // 取得したデータを`courseVideos`に設定
+    courseVideos.value = response2
 
   } catch (error) {
     console.log('失敗！')
@@ -39,9 +39,14 @@ onMounted(async () => {
   }
 })
 
+/** 現在のビデオかどうかを判定する関数 */
+const isCurrentVideo = (video: VideoResponse): boolean => {
+  return currentVideoCode.value === video.videoCode
+}
+
 /** そのコースに所属する「前」or「次」の動画に遷移 */
-const showFrontOrRearVideo = (isToFront) => {
-  let code = ""
+const showFrontOrRearVideo = (isToFront: boolean): void => {
+  let code: number = 0
 
   if (isToFront) {
     // 「前へ」ボタン
@@ -75,27 +80,27 @@ const showFrontOrRearVideo = (isToFront) => {
 }
 
 /** コース一覧に移動する */
-const moveToCourses = () => {
-  const code = courseVideos.value[0].courseId
+const moveToCourses = (): void => {
+  const code: number = courseVideos.value[0].courseId
   router.push(`/course/${code}`)
 }
 
 /** コース内の動画で、最小のvideoCodeを取得する */
-const minVideoCode = computed(() => {
+const minVideoCode = computed<number>(() => {
   return Math.min(...courseVideos.value.map(video => video.videoCode))
 })
 
 /** コース内の動画で、最大のvideoCodeを取得する */
-const maxVideoCode = computed(() => {
+const maxVideoCode = computed<number>(() => {
   return Math.max(...courseVideos.value.map(video => video.videoCode))
 })
 
 // currentVideoCodeとminVideoCodeを比較し、最小のvideoCodeを持つ動画かどうかを判定する
-const isMinVideoCode = computed(() => {
+const isMinVideoCode = computed<boolean>(() => {
   return currentVideoCode.value === minVideoCode.value
 })
 
-const isMaxVideoCode = computed(() => {
+const isMaxVideoCode = computed<boolean>(() => {
   return currentVideoCode.value === maxVideoCode.value
 })
 
@@ -122,12 +127,12 @@ provide('courseVideos', courseVideos)
 
       <div class="block__video_detail">
         <div class="textWrapper">
-          <p>動画タイトルサンプル：</p>
-          <p>更新日：</p>
-          <p>概要：</p>
+          <p>動画タイトル：{{ video?.title }}</p>
+          <p>更新日： {{ video?.updatedAt }}</p>
+          <p>概要：{{ video?.overview }}</p>
         </div>
 
-        <div class="buttonWrapper flex mb-1">
+        <div class="buttonWrapper flex mb-4">
           <button
             class="commonButton"
             v-if="!isMinVideoCode"
@@ -142,7 +147,6 @@ provide('courseVideos', courseVideos)
         </div>
 
         <div class="buttonWrapper">
-          <!-- <a href="/videos"  class="commonButton">コースの一覧に戻る</a> -->
           <button @click="moveToCourses"  class="commonButton">コースの詳細に戻る</button>
         </div>
 
@@ -152,10 +156,10 @@ provide('courseVideos', courseVideos)
     <!-- <div class="col-md-4 pt-3"> -->
     <div class="col block__videoPlayerList">
 
-      <div class="row playerList__heading">
+      <div class="playerList heading__lv3 text-center">
         <!-- ここに、コースの名前を表示させたい -->
-        <h3 class="heading__lv3 mb-2">コース名：{{ video?.courseId }}</h3>
-        <button class="btn btn-info for-sp btn-toggle commonButton">プレイヤーリストを開く</button>
+        コース名：{{ video?.courseId }}
+        <!-- <button class="btn btn-info for-sp btn-toggle commonButton">プレイヤーリストを開く</button> -->
       </div>
 
       <!-- <p class="label">
@@ -164,12 +168,15 @@ provide('courseVideos', courseVideos)
 
       <!-- コースに所属する動画一覧を表示させたい -->
       <ul class="playerList">
-        <li v-for="(video, index) in courseVideos" :key="index">
+        <li
+          v-for="(video, index) in courseVideos"
+          :key="index"
+          :class="{ 'current-bg': isCurrentVideo(video) }"
+        >
           <a :href="`/video/${video.videoCode}`">
             {{ video.title }}
           </a>
           <!-- {{ videos.imageSrc }} -->
-          <br>
         </li>
       </ul>
 
@@ -179,10 +186,6 @@ provide('courseVideos', courseVideos)
 </template>
 
 <style lang="scss">
-.container {
-  // padding: 0 1200px;
-}
-
 // 動画枠
 .col.block__video {
   width: 70%;
@@ -215,6 +218,37 @@ provide('courseVideos', courseVideos)
 
 .textWrapper {
   min-height: 10rem;
+}
+
+.playerList {
+  padding-left: 0 !important;
+
+  &.heading__lv3 {
+    color: #fff;
+    padding: 1rem;
+    background: linear-gradient(to bottom, #1abc9c, #2ecc71);
+    margin-bottom: 0 !important;
+  }
+
+  li {
+
+    a {
+      display: block;
+      padding: 0.5rem 1.4rem;
+      border: 1px solid #000;
+
+      &:hover {
+        // opacity: 0.8;
+        background-color: beige;
+        // background: linear-gradient(to bottom, #1abc9c, #2ecc71);
+      }
+    }
+  }
+}
+
+.current-bg {
+  /* ハイライトされるスタイル */
+  background-color: beige;
 }
 
 // 上書き
