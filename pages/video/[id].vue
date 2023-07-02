@@ -147,7 +147,7 @@ provide('courseVideos', courseVideos)
 
       <div class="row playerList__heading">
         <!-- ここに、コースの名前を表示させたい -->
-        <h3 class="heading__lv3 mb-2">コースの内容：{{ video?.courseId }}</h3>
+        <h3 class="heading__lv3 mb-2">コース名：{{ video?.courseId }}</h3>
         <button class="btn btn-info for-sp btn-toggle commonButton">プレイヤーリストを開く</button>
       </div>
 
@@ -178,14 +178,14 @@ provide('courseVideos', courseVideos)
 
 // 動画枠
 .col.block__video {
-  width: 65%;
+  width: 70%;
   border: 1px solid #000;
   box-sizing: border-box;
 }
 
 // プレイヤーリスト大外
 .col.block__videoPlayerList {
-  width: 35%;
+  width: 30%;
 
   border: 1px solid #000;
   box-sizing: border-box;

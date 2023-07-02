@@ -24,6 +24,9 @@
             <li class="nav-item">
               <nuxt-link to="/" class="nav-link">Top</nuxt-link>
             </li>
+            <!-- <li class="nav-item">
+              <nuxt-link to="/category" class="nav-link">カテゴリー</nuxt-link>
+            </li> -->
             <li class="nav-item">
               <nuxt-link to="/courses" class="nav-link">コース一覧</nuxt-link>
             </li>

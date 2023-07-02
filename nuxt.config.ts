@@ -20,7 +20,7 @@ export default defineNuxtConfig({
   },
   css: [
     "@/assets/css/reset.css",
-    // "bootstrap/dist/css/bootstrap.min.css"
+    'bootstrap/dist/css/bootstrap.min.css',
   ],
 
   vite: {

@@ -19,7 +19,6 @@ onMounted(async () => {
       videos.value = response // 取得したデータをvideosに設定
       console.log(videos.value) // データをコンソールに表示するなどの処理
 
-      // id.value = router.params.id
     }
 
   } catch (error) {

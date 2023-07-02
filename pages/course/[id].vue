@@ -84,14 +84,14 @@ provide('course', course)
 
 // 動画枠
 .col.block__course {
-  width: 65%;
+  width: 70%;
   border: 1px solid #000;
   box-sizing: border-box;
 }
 
 // プレイヤーリスト大外
 .col.block__coursePlayerList {
-  width: 35%;
+  width: 30%;
 
   border: 1px solid #000;
   box-sizing: border-box;
