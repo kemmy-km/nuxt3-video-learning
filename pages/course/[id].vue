@@ -30,7 +30,7 @@ onMounted(async () => {
     if (!response2) return
 
     // 取得したデータを`courseVideos`に設定
-    courseVideos.value = response2
+    courseVideos.value = response2.videoList
 
   } catch (error) {
     console.log('失敗！')
@@ -69,6 +69,13 @@ provide('course', course)
             <p>更新日：{{ course?.updatedAt }}</p>
             <p>概要：{{ course?.leadSentence }}</p>
           </div>
+
+          {{ course?.name }}の動画一覧
+          <ul>
+            <li v-for="(video, index) in courseVideos" :key="index" class="">
+              {{ video.title }}
+            </li>
+          </ul>
 
           <div class="buttonWrapper">
             <button @click="moveToCourses"  class="commonButton">コースの一覧に戻る</button>

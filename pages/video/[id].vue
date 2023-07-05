@@ -15,6 +15,9 @@ const video = ref<VideoResponse>()
 /** コースに所属している動画List */
 let courseVideos = ref<VideoResponse[]>([])
 
+/** コース名 */
+let courseName = ref<string>()
+
 onMounted(async () => {
 
   // ルートパラメータから`videoCode`の値を取得
@@ -31,7 +34,9 @@ onMounted(async () => {
     if (!response2) return
 
     // 取得したデータを`courseVideos`に設定
-    courseVideos.value = response2
+    courseVideos.value = response2.videoList
+    // コース名に設定
+    courseName.value = response2.courseName
 
   } catch (error) {
     console.log('失敗！')
@@ -157,8 +162,7 @@ provide('courseVideos', courseVideos)
     <div class="col block__videoPlayerList">
 
       <div class="playerList heading__lv3 text-center">
-        <!-- ここに、コースの名前を表示させたい -->
-        コース名：{{ video?.courseId }}
+        コース名：{{ courseName }}
         <!-- <button class="btn btn-info for-sp btn-toggle commonButton">プレイヤーリストを開く</button> -->
       </div>
 

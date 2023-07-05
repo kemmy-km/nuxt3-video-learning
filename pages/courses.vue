@@ -46,7 +46,7 @@ const showDetail = (id: number): void => {
     <ul class="card-list">
       <li
         v-for="(course, index) in courses" 
-        class="card__col3 shadow-sm"
+        class="card card__col3 shadow-sm"
         :key="index"
         @click="() => showDetail(course.courseId)"
       >

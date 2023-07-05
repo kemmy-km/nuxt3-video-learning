@@ -1,5 +1,5 @@
 import { API_BASE_URL } from "~/constants/common"
-import { VideoResponse } from "types/api/video"
+import { VideoResponse, VideosByCourseIdResponse } from "types/api/video"
 
 /** 動画一覧取得 */
 export const fetchVideos = async (): // data: VideoRequest
@@ -14,8 +14,8 @@ Promise<VideoResponse[] | undefined> => {
 export const fetchVideosByCourseId = async (
   courseId: number
 ): // data: VideoRequest
-Promise<VideoResponse[] | undefined> => {
-  const response = await $fetch<VideoResponse[]>(
+Promise<VideosByCourseIdResponse | undefined> => {
+  const response = await $fetch<VideosByCourseIdResponse>(
     `${API_BASE_URL}/course/videos/${courseId}`
   )
   if (!response) return

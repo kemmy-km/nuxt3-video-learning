@@ -39,6 +39,8 @@ export type VideosByCourseIdRequest = {
 
 /** コースに所属する動画Listの取得Response */
 export type VideosByCourseIdResponse = {
+  /** コース名 */
+  courseName: string
   /** 特定のコースIDに紐づく動画List */
   videoList: VideoResponse[]
 }
