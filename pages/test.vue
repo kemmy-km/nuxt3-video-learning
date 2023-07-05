@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { API_BASE_URL } from 'constants/common';
+import { API_BASE_URL } from '~/constants/common';
 
-const  fetchData = async() => {
+const fetchData = async() => {
   const URL = `${API_BASE_URL}/videos`
 
   /** DBの作成・接続が完了したら、こちらを使用する */

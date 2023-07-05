@@ -78,7 +78,7 @@ provide('course', course)
       </div>
     </div>
 
-    <div class="card__col3 shadow-sm" style="position: absolute; top: 8rem; right: 4rem;">
+    <div class="card__detail shadow-sm" style="position: absolute; top: 8rem; right: 4rem;">
       <img :src="`${course?.imageSrc}`" alt="">
 
       <div class="card-content">

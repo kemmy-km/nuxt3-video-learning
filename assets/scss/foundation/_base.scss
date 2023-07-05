@@ -18,8 +18,7 @@ ul {
 
 .boxShadow {
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0px 2px 2px 0px rgba(0, 0, 0, 0.14),
-    0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 
 .heading__lv2 {
@@ -82,7 +81,6 @@ ul {
   &:disabled {
     background-color: grey;
     border: 2px solid grey;
-
   }
 
   &:not(:disabled) {
@@ -139,8 +137,6 @@ img {
   padding: 5px;
 }
 
-
-
 .card-list {
   display: flex;
   flex-wrap: wrap;
@@ -173,6 +169,11 @@ img {
   &__col4 {
     width: calc(25% - 20px);
   }
+
+  // コース詳細のカードなど
+  &__detail {
+    width: calc(33.3333% - 20px);
+  }
 }
 
 .card-head {
@@ -181,7 +182,7 @@ img {
   font-weight: bold;
   //   background-color: blue;
   // background: $gradient-11;
-  background: linear-gradient(160deg, #3DC1BD, #9CE8CF);
+  background: linear-gradient(160deg, #3dc1bd, #9ce8cf);
 
   color: #fff;
 }
@@ -190,6 +191,14 @@ img {
   padding: 20px;
   background-color: #fff;
   color: #000;
+}
+
+.card__tag {
+  margin-right: 0.4rem;
+  padding: 0.1rem 1rem;
+  background: linear-gradient(to bottom, #1abc9c, #2ecc71);
+  color: #fff;
+  border-radius: 10px;
 }
 
 .modal-wrapper {
@@ -230,33 +239,6 @@ img {
   }
 }
 
-.card {
-  margin: 0 10px 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-  &__col2 {
-    width: calc(50% - 20px);
-  }
-
-  &__col3 {
-    width: calc(33.3333% - 20px);
-  }
-
-  &__col4 {
-    width: calc(25% - 20px);
-  }
-}
-
-.card__tag {
-  margin-right: 0.4rem;
-  padding: 0.1rem 1rem;
-  background: linear-gradient(to bottom, #1abc9c, #2ecc71);
-  color: #fff;
-  border-radius: 10px;
-}
-
 .modal-wrapper {
   position: fixed;
   top: 0;
@@ -294,11 +276,9 @@ img {
   }
 }
 
-
 .shadow-sm {
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 }
-
 
 /** 
  * アニメーション
