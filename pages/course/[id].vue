@@ -3,7 +3,6 @@ import { fetchCourseDetail } from '~/apis/course'
 import { fetchVideosByCourseId } from '~/apis/video'
 import { CourseResponse } from 'types/api/course'
 import { VideoResponse } from 'types/api/video'
-import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()

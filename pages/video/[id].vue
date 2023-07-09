@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { fetchVideoDetail, fetchVideosByCourseId } from '~/apis/video'
 import { VideoResponse } from 'types/api/video'
-import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { VIDEO_DOMAIN_URL } from '~/constants/common'
 
@@ -177,8 +176,9 @@ provide('courseVideos', courseVideos)
           :key="index"
           :class="{ 'current-bg': isCurrentVideo(video) }"
         >
-          <a :href="`/video/${video.videoCode}`">
-            {{ video.title }}
+          <a :href="`/video/${video.videoCode}`" style="display: flex; align-items: center;">
+            <span>{{ video.title }}</span>
+            <span class="video_play"></span>
           </a>
           <!-- {{ videos.imageSrc }} -->
         </li>
@@ -258,6 +258,30 @@ provide('courseVideos', courseVideos)
 // 上書き
 .d-flex {
   justify-content: flex-start !important;
+}
+
+.video_play {
+    display: inline-block;
+    position: relative;
+    width: 1em;
+    height: 1em;
+    border: 0.05em solid currentColor;
+    border-radius: 50%;
+    color: #000;
+    // font-size: 200px;
+    font-size: 20px;
+}
+.video_play::before {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translateY(-50%);
+    width: 0px;
+    height: 0px;
+    border: 0.3em solid transparent;
+    border-left: 0.5em solid currentColor;
+    box-sizing: border-box;
+    content: "";
 }
 
 @media (max-width: 1060px) {

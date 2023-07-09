@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { fetchVideos } from '~/apis/video'
 import { VideoResponse } from 'types/api/video'
-import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()

@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["nuxt"],
+  "cSpell.words": ["nuxt", "axios", "Axios", "nuxtjs"],
   "cSpell.enableFiletypes": [
     "vue" // vueでもスペルチェッカーが機能するように設定
   ],

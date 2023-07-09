@@ -1,3 +1,18 @@
+<script setup>
+import { useRouter } from 'vue-router'
+import { useSession } from '~/composables/useSession'
+
+const { isLoggedIn, logout } = useSession()
+const router = useRouter()
+
+console.log("isLoggedIn", isLoggedIn)
+
+const handleLogout = async() => {
+  await logout()
+  router.push('/')
+}
+</script>
+
 <template>
   <div class="navBar">
     <!-- <NuxtLink to="/">HOME / </NuxtLink>
@@ -24,14 +39,20 @@
             <li class="nav-item">
               <nuxt-link to="/" class="nav-link">Top</nuxt-link>
             </li>
-            <!-- <li class="nav-item">
-              <nuxt-link to="/category" class="nav-link">カテゴリー</nuxt-link>
-            </li> -->
             <li class="nav-item">
               <nuxt-link to="/courses" class="nav-link">コース一覧</nuxt-link>
             </li>
             <li class="nav-item">
               <nuxt-link to="/setting" class="nav-link">設定</nuxt-link>
+            </li>
+
+            <li class="nav-item">
+              <template v-if="!isLoggedIn">
+                <nuxt-link to="/login" class="nav-link">ログイン</nuxt-link>
+              </template>
+              <template v-else>
+                <button @click="handleLogout" class="nav-link">ログアウト</button>
+              </template>
             </li>
           </ul>
         </div>
