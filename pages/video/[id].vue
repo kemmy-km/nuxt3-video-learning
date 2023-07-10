@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { fetchVideoDetail, fetchVideosByCourseId } from '~/apis/video'
 import { VideoResponse } from 'types/api/video'
-import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { VIDEO_DOMAIN_URL } from '~/constants/common'
 

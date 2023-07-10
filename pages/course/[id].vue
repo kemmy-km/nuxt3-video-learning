@@ -3,7 +3,6 @@ import { fetchCourseDetail } from '~/apis/course'
 import { fetchVideosByCourseId } from '~/apis/video'
 import { CourseResponse } from 'types/api/course'
 import { VideoResponse } from 'types/api/video'
-import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -66,21 +65,9 @@ provide('course', course)
 
         <div class="block__course_detail">
           <div class="textWrapper">
-            <p>更新日：{{ course?.updatedAt }}</p>
-            <p>概要：{{ course?.leadSentence }}</p>
+            <!-- <p>更新日：{{ course?.updatedAt }}</p> -->
+            <p>{{ course?.leadSentence }}</p>
           </div>
-
-          {{ course?.name }}の動画一覧
-          <ul>
-            <li v-for="(video, index) in courseVideos" :key="index" class="">
-              {{ video.title }}
-            </li>
-          </ul>
-
-          <div class="buttonWrapper">
-            <button @click="moveToCourses"  class="commonButton">コースの一覧に戻る</button>
-          </div>
-
         </div>
       </div>
     </div>
@@ -118,6 +105,27 @@ provide('course', course)
       </li>
     </ul> -->
 
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h3 class="heading__lv3">
+        {{ course?.name }}の動画一覧
+      </h3>
+      <ul>
+        <li v-for="(video, index) in courseVideos" :key="index" class="">
+          {{ video.title }}
+        </li>
+      </ul>
+
+      <div class="mt-4">
+        <p>最終更新日：{{ course?.updatedAt }}</p>
+      </div>
+
+      <div class="buttonWrapper">
+        <button @click="moveToCourses"  class="commonButton">コースの一覧に戻る</button>
+      </div>
+    </div>
   </section>
 
   <section class="section pb-4">
@@ -158,9 +166,29 @@ provide('course', course)
 
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .section {
-  background-color: lightskyblue;
+  // background-color: lightskyblue;
+  // background-color: $color-dark-1;
+  color: #fff;
+  padding: 2rem 0;
+}
+
+.section:first-of-type {
+  min-height: 20vh;
+}
+
+.section:nth-last-of-type(2n) {
+  background-color: #fff;
+  color: #000;
+}
+
+.section:nth-last-of-type(2n+1) {
+  background-color: #1c1d1f;
+  color: #fff;
+}
+
+.heading__lv2 {
   color: #fff;
 }
 
@@ -189,7 +217,7 @@ provide('course', course)
   box-sizing: border-box;
   // width: 94%;
   max-width: 90%;
-  min-height: 40vh;
+  min-height: 30vh;
 
   margin-top: 1rem;
 }
@@ -201,10 +229,6 @@ provide('course', course)
 // 上書き
 .d-flex {
   justify-content: flex-start !important;
-}
-
-.section:first-of-type {
-  min-height: 80vh;
 }
 
 @media (max-width: 1060px) {

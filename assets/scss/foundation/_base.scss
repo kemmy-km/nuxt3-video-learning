@@ -4,6 +4,10 @@
   margin-top: 2rem;
 }
 
+.section {
+  padding: 2rem 0;
+}
+
 ol,
 ul {
   list-style: none;
@@ -23,14 +27,14 @@ ul {
 }
 
 .heading__lv2 {
-  font-size: 1.6rem;
+  font-size: 2rem;
   // color: #fff;
   color: #000;
   margin-bottom: 1.6rem;
 }
 
 .heading__lv3 {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   // color: #fff;
   color: #000;
   margin-bottom: 1.6rem;
@@ -199,6 +203,14 @@ img {
   border-radius: 10px;
 }
 
+.left-box {
+  width: 50%;
+}
+
+.right-box {
+  width: 50%;
+}
+
 .modal-wrapper {
   position: fixed;
   top: 0;
@@ -275,7 +287,8 @@ img {
 }
 
 .shadow-sm {
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  // box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.08) !important;
 }
 
 /** 

@@ -14,6 +14,7 @@
   color: #fff;
   min-width: 100%;
   min-height: 20px;
+  margin-top: 2rem;
 }
 .inner {
   padding: 1rem;

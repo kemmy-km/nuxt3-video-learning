@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { fetchCourses } from '~/apis/course'
 import { CourseResponse } from 'types/api/course'
-import { ref, onMounted, provide } from 'vue'
+// import { ref, onMounted, provide } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
