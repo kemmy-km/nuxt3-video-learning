@@ -21,7 +21,7 @@ provide('items', breadcrumbsData)
 </script>
 
 <template>
-  <nav>
+  <nav class="l-breadcrumb">
     <!-- パンくずリストの表示 -->
     <ul>
       <li v-for="item in items" :key="item.path">
@@ -30,3 +30,14 @@ provide('items', breadcrumbsData)
     </ul>
   </nav>
 </template>
+
+<style lang="scss">
+.l-breadcrumb {
+  background: #1c1d1f;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+</style>

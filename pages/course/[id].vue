@@ -58,6 +58,11 @@ provide('course', course)
 <template>
   <section class="section">
     <div class="container">
+      <div class="breadcrumb">
+        <nuxt-link to="/courses" class="nav-link">コース一覧</nuxt-link> 
+        &nbsp;&nbsp;>&nbsp;&nbsp;{{ course?.name }}
+      </div>
+
       <div class="col block__course" style="position: relative;">
         <h2 class="heading__lv2">
           {{ course?.name }}
@@ -135,40 +140,10 @@ provide('course', course)
       </div>
     </div>
   </section>
-
-
-    <!-- <div class="col-md-4"> -->
-
-  <!-- <div class="container d-flex">
-    <div class="col block__course">
-      <h2 class="heading__lv2">
-        {{ course.name }}
-      </h2>
-
-      <div style="width: 100px;">
-        <img :src="course.imageSrc" alt="Thumbnail" style="width: 100%;">
-      </div>
-
-      <div class="block__course_detail">
-        <div class="textWrapper">
-
-          <p>更新日：</p>
-          <p>概要：</p>
-        </div>
-
-        <div class="buttonWrapper">
-          <button @click="showCourseVideo"  class="commonButton">動画を視聴する</button>
-          <a href="/courses"  class="commonButton">コースの一覧に戻る</a>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
 </template>
 
 <style lang="scss" scoped>
 .section {
-  // background-color: lightskyblue;
   // background-color: $color-dark-1;
   color: #fff;
   padding: 2rem 0;
@@ -195,7 +170,7 @@ provide('course', course)
 // 動画枠
 .col.block__course {
   width: 70%;
-  border: 1px solid #000;
+  // border: 1px solid #000;
   box-sizing: border-box;
 }
 
@@ -203,17 +178,17 @@ provide('course', course)
 .col.block__coursePlayerList {
   width: 30%;
 
-  border: 1px solid #000;
+  // border: 1px solid #000;
   box-sizing: border-box;
 }
 
 .block__coursePlayer {
-  border: 1px solid #000;
+  // border: 1px solid #000;
   box-sizing: border-box;
 }
 
 .block__course_detail {
-  border: 1px solid #000;
+  // border: 1px solid #000;
   box-sizing: border-box;
   // width: 94%;
   max-width: 90%;

@@ -1,16 +1,26 @@
 .nuxtPage {
-  min-height: 90vh;
+  min-height: 80vh;
   // padding: 2rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .section {
-  padding: 2rem 0;
+  padding: 1.4rem 0;
 }
 
+a {
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+dl,
 ol,
 ul {
   list-style: none;
+  margin-bottom: 0 !important;
 }
 
 .font-bold {
@@ -48,9 +58,9 @@ ul {
   margin-bottom: 1rem;
 }
 
-.mb-2 {
-  margin-bottom: 2rem;
-}
+// .mb-2 {
+//   margin-bottom: 2rem;
+// }
 
 .d-flex {
   display: flex;
@@ -68,6 +78,19 @@ ul {
     flex-direction: row;
     justify-content: space-evenly;
   }
+}
+
+// .middle-color {
+//   background: linear-gradient(#9ce8cf, #1c1d1f);
+// }
+
+.breadcrumb {
+  color: #9ce8cf;
+  a {
+    color: #9ce8cf;
+  }
+
+  margin-bottom: 0 !important;
 }
 
 .commonButton {

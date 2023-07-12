@@ -115,6 +115,18 @@ provide('courseVideos', courseVideos)
 </script>
 
 <template>
+  <section class="section">
+    <div class="container">
+      <div class="breadcrumb">
+        <nuxt-link to="/courses" class="nav-link">コース一覧</nuxt-link>&nbsp;&nbsp;>&nbsp;&nbsp;
+        <!-- <nuxt-link to="/courses" class="nav-link">{{ courseName }}</nuxt-link> -->
+        <a href="/courses">{{ courseName }}</a>
+        &nbsp;&nbsp;>&nbsp;&nbsp;
+        {{ video?.title }}
+      </div>
+    </div>
+  </section>
+  
   <div class="container d-flex">
     <!-- <div class="col-md-4"> -->
     <div class="col block__video">
@@ -130,7 +142,7 @@ provide('courseVideos', courseVideos)
       </div>
 
       <div class="block__video_detail">
-        <div class="textWrapper">
+        <div class="textWrapper mb-4">
           <p>動画タイトル：{{ video?.title }}</p>
           <p>更新日： {{ video?.updatedAt }}</p>
           <p>概要：{{ video?.overview }}</p>
@@ -161,13 +173,9 @@ provide('courseVideos', courseVideos)
     <div class="col block__videoPlayerList">
 
       <div class="playerList heading__lv3 text-center">
-        コース名：{{ courseName }}
+        {{ courseName }}
         <!-- <button class="btn btn-info for-sp btn-toggle commonButton">プレイヤーリストを開く</button> -->
       </div>
-
-      <!-- <p class="label">
-        {{ $course->course->name }}
-      </p> -->
 
       <!-- コースに所属する動画一覧を表示させたい -->
       <ul class="playerList">
@@ -179,7 +187,6 @@ provide('courseVideos', courseVideos)
           <a :href="`/video/${video.videoCode}`">
             {{ video.title }}
           </a>
-          <!-- {{ videos.imageSrc }} -->
         </li>
       </ul>
 
@@ -188,11 +195,11 @@ provide('courseVideos', courseVideos)
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 // 動画枠
 .col.block__video {
   width: 70%;
-  border: 1px solid #000;
+  // border: 1px solid #000;
   box-sizing: border-box;
 }
 
@@ -200,17 +207,17 @@ provide('courseVideos', courseVideos)
 .col.block__videoPlayerList {
   width: 30%;
 
-  border: 1px solid #000;
+  // border: 1px solid #000;
   box-sizing: border-box;
 }
 
 .block__videoPlayer {
-  border: 1px solid #000;
+  // border: 1px solid #000;
   box-sizing: border-box;
 }
 
 .block__video_detail {
-  border: 1px solid #000;
+  // border: 1px solid #000;
   box-sizing: border-box;
   // width: 94%;
   max-width: 90%;
@@ -221,6 +228,9 @@ provide('courseVideos', courseVideos)
 
 .textWrapper {
   min-height: 10rem;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  padding: 1rem;
 }
 
 .playerList {
@@ -257,6 +267,14 @@ provide('courseVideos', courseVideos)
 // 上書き
 .d-flex {
   justify-content: flex-start !important;
+}
+
+// .breadcrumb {
+//   background: #1c1d1f;
+// }
+
+.section:first-of-type {
+  background: #1c1d1f;
 }
 
 @media (max-width: 1060px) {
