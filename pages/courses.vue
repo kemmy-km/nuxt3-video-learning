@@ -6,6 +6,11 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const courses = ref<CourseResponse[]>([])
 
+const runtimeConfig = useRuntimeConfig()
+const API_BASE_URL = runtimeConfig.public.apiUrl
+console.log(API_BASE_URL)
+// console.log(runtimeConfig.apiKey)
+
 onMounted(async () => {
 
   try {

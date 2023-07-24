@@ -1,5 +1,7 @@
 <script lang="ts" setup>
-import { API_BASE_URL } from '~/constants/common';
+import { API_BASE_URL } from '~/constants/common'
+
+// const API_BASE_URL = useRuntimeConfig().public.apiUrl
 
 const fetchData = async() => {
   const URL = `${API_BASE_URL}/videos`

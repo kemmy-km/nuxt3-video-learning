@@ -1,6 +1,8 @@
 import { API_BASE_URL } from "~/constants/common"
 import { VideoResponse, VideosByCourseIdResponse } from "types/api/video"
 
+// const API_BASE_URL = useRuntimeConfig().public.apiUrl
+
 /** 動画一覧取得 */
 export const fetchVideos = async (): // data: VideoRequest
 Promise<VideoResponse[] | undefined> => {

@@ -3,6 +3,16 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
+  runtimeConfig: {
+    public: {
+      ENVIRONMENT: process.env.ENVIRONMENT ?? "local",
+      // apiKey: "",
+      // apiUrl: "",
+      // apiKey: process.env.NUXT_API_KEY,
+      apiUrl: process.env.NUXT_PUBLIC_API_URL,
+    },
+  },
+
   app: {
     head: {
       title: "VideoApp",
@@ -16,7 +26,6 @@ export default defineNuxtConfig({
         { name: "format-detection", content: "telephone=no" },
       ],
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-      //script: [{ src: '/js/jquery-3.3.1.min.js' }, { src: '/js/slick/slick.min.js' }],
     },
   },
   css: ["@/assets/css/reset.css", "bootstrap/dist/css/bootstrap.min.css"],
