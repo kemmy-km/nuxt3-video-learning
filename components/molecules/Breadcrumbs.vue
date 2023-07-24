@@ -1,7 +1,7 @@
 <script setup>
 // import { ref } from 'vue'
 
-let items = ref([]) // パンくずリストのデータをここで定義
+const items = ref([]) // パンくずリストのデータをここで定義
 
 const breadcrumbsData = [
   { label: 'VideoApp', path: '/' },

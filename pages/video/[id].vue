@@ -12,10 +12,10 @@ const videoDomain = ref<string>(VIDEO_DOMAIN_URL)
 const video = ref<VideoResponse>()
 
 /** コースに所属している動画List */
-let courseVideos = ref<VideoResponse[]>([])
+const courseVideos = ref<VideoResponse[]>([])
 
 /** コース名 */
-let courseName = ref<string>()
+const courseName = ref<string>()
 
 onMounted(async () => {
 
@@ -58,7 +58,7 @@ const showFrontOrRearVideo = (isToFront: boolean): void => {
     // 降順にソートする
     courseVideos.value = courseVideos.value.sort((a, b) => b.videoCode - a.videoCode);
 
-    for (let courseVideo of courseVideos.value) {
+    for (const courseVideo of courseVideos.value) {
       if (courseVideo.videoCode < currentVideoCode.value) {
 
         // `courseVideo.videoCode`を「前ボタン」で使う変数に代入
@@ -70,7 +70,7 @@ const showFrontOrRearVideo = (isToFront: boolean): void => {
   } else {
     // 「次へ」ボタン
 
-    for (let courseVideo of courseVideos.value) {
+    for (const courseVideo of courseVideos.value) {
       if (courseVideo.videoCode > currentVideoCode.value) {
 
         // `courseVideo.videoCode`を「次ボタン」で使う変数に代入
