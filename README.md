@@ -105,3 +105,11 @@ yarn preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+# http
+
+chrome://flags/
+をアドレス欄に。
+
+下記を入力して enable に変えてみる
+#allow-insecure-localhost

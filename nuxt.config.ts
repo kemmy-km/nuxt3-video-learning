@@ -15,6 +15,8 @@ export default defineNuxtConfig({
   },
 
   app: {
+    // baseURL: getBaseUrl(),
+
     head: {
       title: "VideoApp",
       htmlAttrs: {
@@ -41,3 +43,19 @@ export default defineNuxtConfig({
     },
   },
 })
+
+// https://zenn.dev/arkwknsk/articles/f092b7ea77d112
+function getBaseUrl() {
+  const environment = process.env.APP_MODE
+
+  switch (environment) {
+    case "staging":
+      return "/stg/"
+    case "development":
+      return "/dev/"
+    case "production":
+      return "/"
+    default:
+      return "/"
+  }
+}
