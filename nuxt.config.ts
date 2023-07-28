@@ -18,7 +18,7 @@ export default defineNuxtConfig({
     // baseURL: getBaseUrl(),
 
     head: {
-      title: "VideoApp",
+      title: "VideoLearnApp",
       htmlAttrs: {
         lang: "ja",
       },

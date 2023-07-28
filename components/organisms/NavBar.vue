@@ -7,7 +7,7 @@
 
     <nav class="navbar navbar-expand-md navbar-light bg-white">
       <div class="container">
-        <nuxt-link to="/" class="navbar-brand">VideoApp</nuxt-link>
+        <nuxt-link to="/" class="navbar-brand">VideoLearnApp</nuxt-link>
         <button
           class="navbar-toggler"
           type="button"

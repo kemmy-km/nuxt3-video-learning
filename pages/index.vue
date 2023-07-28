@@ -35,7 +35,7 @@ const showCourses = (): void => {
 
   <section class="section feature">
     <h3 class="heading__lv3 text-center">
-      VideoLearningの特徴
+      VideoLearnAppの特徴
     </h3>
 
     <div class="container d-flex">
