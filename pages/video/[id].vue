@@ -131,8 +131,6 @@ provide('courseVideos', courseVideos)
     <!-- <div class="col-md-4"> -->
     <div class="col block__video">
       <div class="block__videoPlayer">
-        <h2>{{ video?.title }}</h2>
-
         <iframe
           title="vimeo-player"
           :src="`${videoDomain}/video/${video?.videoNumber}`"
@@ -143,7 +141,7 @@ provide('courseVideos', courseVideos)
 
       <div class="block__video_detail">
         <div class="textWrapper mb-4">
-          <p>動画タイトル：{{ video?.title }}</p>
+          <h2 class="heading__lv2">{{ video?.title }}</h2>
           <p>更新日： {{ video?.updatedAt }}</p>
           <p>概要：{{ video?.overview }}</p>
         </div>
@@ -222,8 +220,6 @@ provide('courseVideos', courseVideos)
   // width: 94%;
   max-width: 90%;
   min-height: 40vh;
-
-  margin-top: 1rem;
 }
 
 .textWrapper {

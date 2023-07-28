@@ -129,7 +129,7 @@ const showCourses = (): void => {
 
 <style lang="scss">
 .container.index {
-  min-height: 70vh;
+  min-height: 50vh;
 }
 
 .feature {
