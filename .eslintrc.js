@@ -17,7 +17,6 @@ module.exports = {
     "prettier/prettier": "warn",
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
-    // ここに追加のルールを設定します
     "no-unused-vars": "warn", // 未使用の変数に警告を表示
     "no-constant-condition": ["error", { checkLoops: false }], // ループ内での定数条件の警告を無効化
   },

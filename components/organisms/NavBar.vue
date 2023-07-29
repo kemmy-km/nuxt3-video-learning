@@ -5,9 +5,8 @@ import { APP_NAME, ITEMS } from "~/constants/common"
 const closeMenu = () => {
   /** ドロワーメニューの要素を取得 */
   const navbarNav: HTMLElement | null = document.getElementById('navbarNav')
+  if (!navbarNav) return
 
-  if (!navbarNav) return 
-  // showクラスを削除
   navbarNav.classList.remove('show')
 }
 </script>

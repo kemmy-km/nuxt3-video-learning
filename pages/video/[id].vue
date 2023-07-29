@@ -204,14 +204,12 @@ provide('courseVideos', courseVideos)
 // 動画枠
 .col.block__video {
   width: 70%;
-  // border: 1px solid #000;
   box-sizing: border-box;
 }
 
 // プレイヤーリスト大外
 .col.block__videoPlayerList {
   width: 30%;
-
   box-sizing: border-box;
 }
 
@@ -221,7 +219,6 @@ provide('courseVideos', courseVideos)
 
 .block__video_detail {
   box-sizing: border-box;
-  // width: 94%;
   max-width: 90%;
   min-height: 40vh;
 }
@@ -269,15 +266,12 @@ provide('courseVideos', courseVideos)
       &:hover {
         opacity: 0.8;
         background-color: beige;
-        // background: linear-gradient(to bottom, #1abc9c, #2ecc71);
       }
     }
   }
 }
 
 .current-bg {
-  /* ハイライトされるスタイル */
-  // background-color: beige;
   background-color: #1c1d1f;
   color: #1abc9c;
 

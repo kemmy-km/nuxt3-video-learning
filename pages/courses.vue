@@ -29,7 +29,6 @@ onMounted(async () => {
 const breadcrumbsData = [
   { label: 'Home', path: '/' },
   { label: 'About', path: '/about' },
-  // ページごとのパンくずリストのデータをここで定義
 ]
 
 // コンポーネントツリーに提供する

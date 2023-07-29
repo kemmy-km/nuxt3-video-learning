@@ -1,12 +1,12 @@
 <script setup>
 import { APP_NAME } from "~/constants/common"
 
-const items = ref([]) // パンくずリストのデータをここで定義
+/** パンくずリストのデータをここで定義 */
+const items = ref([])
 
 const breadcrumbsData = [
   { label: APP_NAME, path: '/' },
   { label: 'Course', path: '/courses' },
-  // ページごとのパンくずリストのデータをここで定義
 ]
 
 onMounted(async () => {

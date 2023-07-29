@@ -70,7 +70,6 @@ provide('course', course)
 
         <div class="block__course_detail">
           <div class="textWrapper">
-            <!-- <p>更新日：{{ course?.updatedAt }}</p> -->
             <p>{{ course?.leadSentence }}</p>
           </div>
         </div>
@@ -90,25 +89,6 @@ provide('course', course)
         </div>
       </div>
     </div>
-
-    <!-- <ul class="card-list">
-      <li
-        v-for="(course, index) in courses" 
-        class="card__col3 shadow-sm"
-        :key="index"
-        @click="() => showDetail(course.courseId)"
-      >
-        <img :src="`${course.imageSrc}`" alt="">
-
-        <div class="card-content">
-          {{ course.name }}
-        </div>
-
-        <div class="buttonWrapper">
-          <button @click="moveToCourses"  class="commonButton">コースの一覧に戻る</button>
-        </div>
-      </li>
-    </ul> -->
 
   </section>
 
@@ -144,7 +124,6 @@ provide('course', course)
 
 <style lang="scss" scoped>
 .section {
-  // background-color: $color-dark-1;
   color: #fff;
   padding: 2rem 0;
 }
@@ -170,30 +149,23 @@ provide('course', course)
 // 動画枠
 .col.block__course {
   width: 70%;
-  // border: 1px solid #000;
   box-sizing: border-box;
 }
 
 // プレイヤーリスト大外
 .col.block__coursePlayerList {
   width: 30%;
-
-  // border: 1px solid #000;
   box-sizing: border-box;
 }
 
 .block__coursePlayer {
-  // border: 1px solid #000;
   box-sizing: border-box;
 }
 
 .block__course_detail {
-  // border: 1px solid #000;
   box-sizing: border-box;
-  // width: 94%;
   max-width: 90%;
   min-height: 30vh;
-
   margin-top: 1rem;
 }
 
@@ -201,7 +173,6 @@ provide('course', course)
   min-height: 10rem;
 }
 
-// 上書き
 .d-flex {
   justify-content: flex-start !important;
 }
