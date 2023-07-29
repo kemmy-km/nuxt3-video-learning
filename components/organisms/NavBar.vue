@@ -1,3 +1,7 @@
+<script setup>
+import { APP_NAME } from "~/constants/common"
+</script>
+
 <template>
   <div class="navBar">
     <!-- <NuxtLink to="/">HOME / </NuxtLink>
@@ -7,7 +11,7 @@
 
     <nav class="navbar navbar-expand-md navbar-light bg-white">
       <div class="container">
-        <nuxt-link to="/" class="navbar-brand">VideoLearnApp</nuxt-link>
+        <nuxt-link to="/" class="navbar-brand">{{ APP_NAME }}</nuxt-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -24,9 +28,6 @@
             <li class="nav-item">
               <nuxt-link to="/" class="nav-link">Top</nuxt-link>
             </li>
-            <!-- <li class="nav-item">
-              <nuxt-link to="/category" class="nav-link">カテゴリー</nuxt-link>
-            </li> -->
             <li class="nav-item">
               <nuxt-link to="/courses" class="nav-link">コース一覧</nuxt-link>
             </li>

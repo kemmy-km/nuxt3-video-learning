@@ -3,3 +3,6 @@ export const API_BASE_URL: string = "https://kemmy.tokyo/api"
 
 /** vimeo */
 export const VIDEO_DOMAIN_URL: string = "https://player.vimeo.com"
+
+/** アプリ名 */
+export const APP_NAME: string = "VideoLearnApp"

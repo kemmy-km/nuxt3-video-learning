@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { APP_NAME } from "~/constants/common"
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -35,7 +36,7 @@ const showCourses = (): void => {
 
   <section class="section feature">
     <h3 class="heading__lv3 text-center">
-      VideoLearnAppの特徴
+      {{ APP_NAME }}の特徴
     </h3>
 
     <div class="container d-flex">
@@ -135,6 +136,7 @@ const showCourses = (): void => {
 .feature {
   .container {
     padding-top: 2rem;
+    justify-content: space-around;
   }
 
   .container:nth-child(2n) {

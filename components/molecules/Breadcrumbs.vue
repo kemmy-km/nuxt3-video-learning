@@ -1,10 +1,10 @@
 <script setup>
-// import { ref } from 'vue'
+import { APP_NAME } from "~/constants/common"
 
 const items = ref([]) // パンくずリストのデータをここで定義
 
 const breadcrumbsData = [
-  { label: 'VideoLearnApp', path: '/' },
+  { label: APP_NAME, path: '/' },
   { label: 'Course', path: '/courses' },
   // ページごとのパンくずリストのデータをここで定義
 ]
