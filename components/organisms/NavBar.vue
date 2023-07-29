@@ -1,17 +1,23 @@
-<script setup>
-import { APP_NAME } from "~/constants/common"
+<script lang="ts" setup>
+import { APP_NAME, ITEMS } from "~/constants/common"
+
+/** ドロワーメニューを閉じる処理 */
+const closeMenu = () => {
+  /** ドロワーメニューの要素を取得 */
+  const navbarNav: HTMLElement | null = document.getElementById('navbarNav')
+
+  if (!navbarNav) return 
+  // showクラスを削除
+  navbarNav.classList.remove('show')
+}
 </script>
 
 <template>
   <div class="navBar">
-    <!-- <NuxtLink to="/">HOME / </NuxtLink>
-    <NuxtLink to="/about">about / </NuxtLink>
-    <NuxtLink to="/teleport-test">teleport-test / </NuxtLink>
-    <NuxtLink to="/list-test">list-test / </NuxtLink> -->
-
     <nav class="navbar navbar-expand-md navbar-light bg-white">
-      <div class="container">
+      <div class="container-fluid">
         <nuxt-link to="/" class="navbar-brand">{{ APP_NAME }}</nuxt-link>
+
         <button
           class="navbar-toggler"
           type="button"
@@ -23,26 +29,23 @@ import { APP_NAME } from "~/constants/common"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+        
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <nuxt-link to="/" class="nav-link">Top</nuxt-link>
-            </li>
-            <li class="nav-item">
-              <nuxt-link to="/courses" class="nav-link">コース一覧</nuxt-link>
-            </li>
-            <li class="nav-item">
-              <nuxt-link to="/setting" class="nav-link">設定</nuxt-link>
+            <li class="nav-item" v-for="item in ITEMS" :key="item.to">
+              <nuxt-link :to="item.to" class="nav-link" @click="closeMenu">
+                {{ item.text }}
+              </nuxt-link>
             </li>
           </ul>
         </div>
+
       </div>
     </nav>
   </div>
 </template>
 
 <style lang="scss" scoped>
-
 nav {
   display: flex;
   justify-content: space-between;
@@ -73,6 +76,13 @@ nav {
   padding: 1rem;
 }
 
+.navbar-brand {
+  padding: 1rem;
+}
+.navbar-brand:hover {
+  background-color: #e9ecef;
+}
+
 .burger {
   display: none;
   cursor: pointer;
@@ -93,6 +103,17 @@ nav {
 
   .burger {
     display: block;
+  }
+  .navbar-nav {
+    margin-top: 1rem;
+  }
+
+  .nav-link {
+    padding: 1rem 1rem;
+
+    &:hover {
+      background-color: #e9ecef;
+    }
   }
 }
 

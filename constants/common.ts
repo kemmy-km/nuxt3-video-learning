@@ -6,3 +6,19 @@ export const VIDEO_DOMAIN_URL: string = "https://player.vimeo.com"
 
 /** アプリ名 */
 export const APP_NAME: string = "VideoLearnApp"
+
+/** Navメニュー */
+export const ITEMS = [
+  {
+    to: "/",
+    text: "Top",
+  },
+  {
+    to: "/courses",
+    text: "コース一覧",
+  },
+  {
+    to: "/setting",
+    text: "設定",
+  },
+]

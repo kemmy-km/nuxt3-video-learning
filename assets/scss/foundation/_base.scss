@@ -266,6 +266,10 @@ img {
   overflow-y: auto;
 }
 
+.nav-item:hover {
+  opacity: 0.7;
+}
+
 @media (max-width: 767px) {
   .card {
     width: 100%;
