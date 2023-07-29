@@ -89,6 +89,11 @@ const moveToCourses = (): void => {
   router.push(`/course/${code}`)
 }
 
+/** 特定の動画に移動する */
+const moveToVideo = (videoCode: number): void => {
+  router.push(`/video/${videoCode}`)
+}
+
 /** コース内の動画で、最小のvideoCodeを取得する */
 const minVideoCode = computed<number>(() => {
   return Math.min(...courseVideos.value.map(video => video.videoCode))
@@ -160,8 +165,11 @@ provide('courseVideos', courseVideos)
 
         </div>
 
-        <div class="buttonWrapper">
-          <button @click="moveToCourses"  class="commonButton">コースの詳細に戻る</button>
+        <div class="buttonWrapper mb-4">
+          <button
+            @click="moveToCourses"
+            class="commonButton"
+          >コースの詳細に戻る</button>
         </div>
 
       </div>
@@ -181,10 +189,9 @@ provide('courseVideos', courseVideos)
           v-for="(video, index) in courseVideos"
           :key="index"
           :class="{ 'current-bg': isCurrentVideo(video) }"
+          @click="moveToVideo(video.videoCode)"
         >
-          <a :href="`/video/${video.videoCode}`">
-            {{ video.title }}
-          </a>
+          {{ video.title }}
         </li>
       </ul>
 
@@ -205,17 +212,14 @@ provide('courseVideos', courseVideos)
 .col.block__videoPlayerList {
   width: 30%;
 
-  // border: 1px solid #000;
   box-sizing: border-box;
 }
 
 .block__videoPlayer {
-  // border: 1px solid #000;
   box-sizing: border-box;
 }
 
 .block__video_detail {
-  // border: 1px solid #000;
   box-sizing: border-box;
   // width: 94%;
   max-width: 90%;
@@ -240,6 +244,22 @@ provide('courseVideos', courseVideos)
   }
 
   li {
+    padding: 1rem 1rem;
+    // 1abc9c
+    border-right: 1px solid #000;
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+
+    &:first-of-type {
+      border-top: 1px solid #000;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #1abc9c;
+      color: #fff;
+      transition: all 0.4s ease;
+    }
 
     a {
       display: block;
@@ -247,7 +267,7 @@ provide('courseVideos', courseVideos)
       border: 1px solid #000;
 
       &:hover {
-        // opacity: 0.8;
+        opacity: 0.8;
         background-color: beige;
         // background: linear-gradient(to bottom, #1abc9c, #2ecc71);
       }
@@ -257,7 +277,13 @@ provide('courseVideos', courseVideos)
 
 .current-bg {
   /* ハイライトされるスタイル */
-  background-color: beige;
+  // background-color: beige;
+  background-color: #1c1d1f;
+  color: #1abc9c;
+
+  &:hover {
+    color: #000;
+  }
 }
 
 // 上書き
