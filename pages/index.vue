@@ -14,7 +14,7 @@ const showCourses = (): void => {
 <template>
   <section class="section gradient-background">
     <div class="container index">
-      <h2 class="heading__lv2 text-center">動画で学習できるサービス</h2>
+      <h2 class="heading__lv2 text-center">動画で学習できるサービス！</h2>
 
       <div class="lead-text text-center">
         君もこのサービスで周りと差をつけよう！

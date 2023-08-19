@@ -34,6 +34,9 @@ jobs:
           yarn global add firebase-tools
           echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" > service-account.json
           export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/service-account.json
+          pwd
+          ls
+          yarn generate
           firebase deploy --project ${{ secrets.FIREBASE_PROJECT_ID }}
 
         env:
