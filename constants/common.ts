@@ -21,4 +21,4 @@ export const ITEMS = [
     to: "/setting",
     text: "設定",
   },
-]
+] as const
