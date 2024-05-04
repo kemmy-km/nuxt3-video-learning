@@ -44,7 +44,6 @@ const showDetail = (id: number): void => {
 
 <template>
   <div class="container">
-
     <h2 class="heading__lv2">コース一覧</h2>
 
     <ul class="card-list">
